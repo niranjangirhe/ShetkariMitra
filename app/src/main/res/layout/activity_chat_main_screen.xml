@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ChatMainScreenActivity"
+    android:background="@drawable/background_mycrop">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="-1dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chat_uppertab" />
+    <ImageButton
+        android:id="@+id/BackBtnChatMainScreen"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/backarrow"
+        app:layout_constraintBottom_toBottomOf="@+id/ChatsScreenTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ChatsScreenTitle" />
+
+    <TextView
+        android:id="@+id/ChatsScreenTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/chats"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/Chat1Tile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/Chat1Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:srcCompat="@drawable/chat_profile_tile" />
+
+    <ImageView
+        android:id="@+id/Chat2Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat1Tile"
+        app:srcCompat="@drawable/chat_profile_tile" />
+    <ImageView
+        android:id="@+id/Chat3Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat2Tile"
+        app:srcCompat="@drawable/chat_profile_tile" />
+    <ImageView
+        android:id="@+id/Chat4Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat3Tile"
+        app:srcCompat="@drawable/chat_profile_tile" />
+    <ImageView
+        android:id="@+id/Chat5Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat4Tile"
+        app:srcCompat="@drawable/chat_profile_tile" />
+    <ImageView
+        android:id="@+id/Chat6Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat5Tile"
+        app:srcCompat="@drawable/chat_profile_tile" />
+
+    <ImageView
+        android:id="@+id/Chat7Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat8Tile"
+        app:srcCompat="@drawable/chat_devprofile_tile" />
+
+    <ImageView
+        android:id="@+id/Chat8Tile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Chat6Tile"
+        app:srcCompat="@drawable/chat_common_tile" />
+
+
+    <TextView
+        android:id="@+id/ChatCropName1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat1Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat1Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat1Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat2Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat2Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat2Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat3Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat3Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat3Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat4Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat4Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat4Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat5Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat5Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat5Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat6Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat6Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat6Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/app_developer"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat7Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat7Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat7Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+    <TextView
+        android:id="@+id/ChatCropName8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="75dp"
+        android:elevation="3dp"
+        android:fontFamily="sans-serif"
+        android:text="@string/common_forum"
+        android:textColor="@color/green"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Chat8Tile"
+        app:layout_constraintStart_toStartOf="@+id/Chat8Tile"
+        app:layout_constraintTop_toTopOf="@+id/Chat8Tile"
+        app:layout_constraintVertical_bias="0.40" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

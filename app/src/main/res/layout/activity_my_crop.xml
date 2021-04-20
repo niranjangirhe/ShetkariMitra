@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyCropActivity"
+    android:background="@drawable/background_mycrop">
+
+    <ImageView
+        android:id="@+id/imageView14"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        app:srcCompat="@drawable/upper_long" />
+
+    <Button
+        android:id="@+id/CropSuggestBtn"
+        android:layout_width="0dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/button"
+        android:fontFamily="sans-serif"
+        android:text="@string/crop_suggestion"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+    <ImageButton
+        android:id="@+id/BackBtnCropSuggest"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/backarrow"
+        app:layout_constraintBottom_toBottomOf="@+id/textView9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView9"/>
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/my_crops"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/crop1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CropSuggestBtn" />
+
+    <Button
+        android:id="@+id/crop2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/crop1"
+        app:layout_constraintTop_toBottomOf="@+id/CropSuggestBtn" />
+
+    <Button
+        android:id="@+id/crop3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crop1" />
+
+    <Button
+        android:id="@+id/crop4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/crop3"
+        app:layout_constraintTop_toBottomOf="@+id/crop2" />
+
+    <Button
+        android:id="@+id/crop5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/crop3" />
+
+    <Button
+        android:id="@+id/crop6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/crop5"
+        app:layout_constraintTop_toBottomOf="@+id/crop4" />
+
+    <ImageButton
+        android:id="@+id/close1"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop1"
+        app:layout_constraintEnd_toEndOf="@+id/crop1"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/crop1"
+        app:layout_constraintTop_toTopOf="@+id/crop1"
+        app:layout_constraintVertical_bias="0.093" />
+    <ImageButton
+        android:id="@+id/close2"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop2"
+        app:layout_constraintEnd_toEndOf="@+id/crop2"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/crop2"
+        app:layout_constraintTop_toTopOf="@+id/crop2"
+        app:layout_constraintVertical_bias="0.093" />
+    <ImageButton
+        android:id="@+id/close3"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop3"
+        app:layout_constraintEnd_toEndOf="@+id/crop3"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/crop3"
+        app:layout_constraintTop_toTopOf="@+id/crop3"
+        app:layout_constraintVertical_bias="0.093" />
+    <ImageButton
+        android:id="@+id/close4"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop4"
+        app:layout_constraintEnd_toEndOf="@+id/crop4"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/crop4"
+        app:layout_constraintTop_toTopOf="@+id/crop4"
+        app:layout_constraintVertical_bias="0.093" />
+    <ImageButton
+        android:id="@+id/close5"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop5"
+        app:layout_constraintEnd_toEndOf="@+id/crop5"
+        app:layout_constraintHorizontal_bias="0.094"
+        app:layout_constraintStart_toStartOf="@+id/crop5"
+        app:layout_constraintTop_toTopOf="@+id/crop5"
+        app:layout_constraintVertical_bias="0.093" />
+    <ImageButton
+        android:id="@+id/close6"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/cross"
+        android:elevation="2dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop6"
+        app:layout_constraintEnd_toEndOf="@+id/crop6"
+        app:layout_constraintHorizontal_bias="0.0946"
+        app:layout_constraintStart_toStartOf="@+id/crop6"
+        app:layout_constraintTop_toTopOf="@+id/crop6"
+        app:layout_constraintVertical_bias="0.093" />
+
+    <TextView
+        android:id="@+id/cropname1"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/crop1"
+        app:layout_constraintEnd_toEndOf="@+id/crop1"
+        app:layout_constraintStart_toStartOf="@+id/crop1"
+        app:layout_constraintTop_toTopOf="@+id/crop1"
+        app:layout_constraintVertical_bias="0.914" />
+    <TextView
+        android:id="@+id/cropname2"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop2"
+        app:layout_constraintEnd_toEndOf="@+id/crop2"
+        app:layout_constraintStart_toStartOf="@+id/crop2"
+        app:layout_constraintTop_toTopOf="@+id/crop2"
+        app:layout_constraintVertical_bias="0.914" />
+    <TextView
+        android:id="@+id/cropname3"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop3"
+        app:layout_constraintEnd_toEndOf="@+id/crop3"
+        app:layout_constraintStart_toStartOf="@+id/crop3"
+        app:layout_constraintTop_toTopOf="@+id/crop3"
+        app:layout_constraintVertical_bias="0.914" />
+    <TextView
+        android:id="@+id/cropname4"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop4"
+        app:layout_constraintEnd_toEndOf="@+id/crop4"
+        app:layout_constraintStart_toStartOf="@+id/crop4"
+        app:layout_constraintTop_toTopOf="@+id/crop4"
+        app:layout_constraintVertical_bias="0.914" />
+    <TextView
+        android:id="@+id/cropname5"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop5"
+        app:layout_constraintEnd_toEndOf="@+id/crop5"
+        app:layout_constraintStart_toStartOf="@+id/crop5"
+        app:layout_constraintTop_toTopOf="@+id/crop5"
+        app:layout_constraintVertical_bias="0.914" />
+    <TextView
+        android:id="@+id/cropname6"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:maxLength = "35"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/crop6"
+        app:layout_constraintEnd_toEndOf="@+id/crop6"
+        app:layout_constraintStart_toStartOf="@+id/crop6"
+        app:layout_constraintTop_toTopOf="@+id/crop6"
+        app:layout_constraintVertical_bias="0.914" />
+
+    <Button
+        android:id="@+id/Fertilizer_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/button"
+        android:text="@string/fertilzer_suggetion"
+        android:textAllCaps="false"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

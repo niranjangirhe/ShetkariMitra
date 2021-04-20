@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="170dp"
+    android:layout_height="170dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/IconDay1"
+            android:layout_width="match_parent"
+            android:layout_height="85dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:scaleType="fitCenter"
+            app:tint="@color/green40" />
+
+        <TextView
+            android:id="@+id/Day1"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:text="MON"
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/TempDay1"
+            android:layout_width="150dp"
+            android:layout_height="25dp"
+            android:fontFamily="sans-serif"
+            android:text="23/32 °C"
+            android:textStyle=""
+            android:textAlignment="center"
+            android:textColor="@color/green"
+            android:gravity="center"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/DescriptionDay1"
+            android:layout_width="150dp"
+            android:layout_height="20dp"
+            android:fontFamily="sans-serif"
+            android:text="clear"
+            android:textAlignment="center"
+            android:textColor="@color/green40"
+            android:textSize="15dp" />
+
+    </LinearLayout>
+
+
+
+</androidx.cardview.widget.CardView>
