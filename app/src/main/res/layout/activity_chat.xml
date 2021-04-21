@@ -64,7 +64,7 @@
         android:backgroundTint="@color/green"
         android:elevation="2dp"
         android:hint="@string/your_message"
-        android:inputType="text"
+        android:inputType="text|textNoSuggestions"
         android:outlineProvider="none"
         android:shadowColor="#CC1313"
         android:textColor="@color/green"

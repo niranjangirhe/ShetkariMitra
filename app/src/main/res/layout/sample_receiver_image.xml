@@ -37,7 +37,7 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:inputType="textLongMessage|textMultiLine"
+        android:inputType="textLongMessage|textMultiLine|textNoSuggestions"
         android:maxWidth="270dp"
         android:text="Text goes here"
         android:textColor="@color/white"

@@ -17,7 +17,7 @@
         android:ems="15"
         android:fontFamily="sans-serif"
         android:hint="@string/your_name"
-        android:inputType="textPersonName"
+        android:inputType="textPersonName|textNoSuggestions"
         android:textAlignment="center"
         android:textColor="@color/green"
         android:textColorHint="@color/green40"
