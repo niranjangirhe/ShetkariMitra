@@ -42,6 +42,12 @@ import com.google.firebase.storage.UploadTask;
 import com.ngsolutions.myapplication.HelperClasses.HomeAddapter.ChatAdapter;
 import com.ngsolutions.myapplication.HelperClasses.HomeAddapter.ReplyAdapter;
 import com.ngsolutions.myapplication.Model.MessageModel;
+import com.ngsolutions.myapplication.notification.APIService;
+import com.ngsolutions.myapplication.notification.Client;
+import com.ngsolutions.myapplication.notification.Data;
+import com.ngsolutions.myapplication.notification.Response;
+import com.ngsolutions.myapplication.notification.Sender;
+import com.ngsolutions.myapplication.notification.Token;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -50,6 +56,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
 
 public class ReplyActivity extends AppCompatActivity {
 
@@ -73,6 +82,10 @@ public class ReplyActivity extends AppCompatActivity {
     private Uri mImageUri;
     private StorageReference mStoreRef;
     private StorageTask mUploadTask;
+
+    APIService apiService;
+    boolean notify = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,6 +100,8 @@ public class ReplyActivity extends AppCompatActivity {
         progressBar = findViewById(R.id.replyUploadBar);
 
         mStoreRef = FirebaseStorage.getInstance().getReference("uploads");
+
+        apiService = Client.getRetrofit("https://fcm.googleapis.com/").create(APIService.class);
 
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,17 +121,19 @@ public class ReplyActivity extends AppCompatActivity {
             chatTitle = (String) b.get("chatTitle");
             Auth = FirebaseAuth.getInstance();
             fstore = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = fstore.collection("users").document(chatTitle);
-            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(value.exists()) {
-                        chatTitleText.setText(value.get("userName").toString() + " "+getString(R.string.query));
-                    }
-                }
-            });
-            chatTitleText.setText(chatTitle + " "+getString(R.string.query));
             userID = (String) b.get("userID");
+            if(!chatTitle.equals(this.getString(R.string.your))) {
+                DocumentReference documentReference = fstore.collection("users").document(chatTitle);
+                documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                        if (value.exists()) {
+                            chatTitleText.setText(value.get("userName").toString() + " " + getString(R.string.query));
+                        }
+                    }
+                });
+            }
+            chatTitleText.setText(chatTitle + " "+getString(R.string.query));
             queeryMessage = (String) b.get("message");
             checkIfPresent();
             replyAdapter = new ReplyAdapter(messageModels, ReplyActivity.this);
@@ -153,6 +170,7 @@ public class ReplyActivity extends AppCompatActivity {
                     Toast.makeText(ReplyActivity.this, getString(R.string.upload_in_progress), Toast.LENGTH_SHORT).show();
                 }
                 else if(!messageText.getText().toString().isEmpty() ){
+                    notify = true;
                     sendMessage();
                 }
                 else
@@ -179,6 +197,22 @@ public class ReplyActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DocumentReference documentReference = fstore.collection("forums").document(cropCode);
+        documentReference.addSnapshotListener(ReplyActivity.this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    if(Integer.parseInt(value.get("textNum").toString())>0) {
+                        readMessage();
+                    }
+                }
+            }
+        });
+    }
+
     private void fillChats(ArrayList<MessageModel> messageModels) {
         chatRecyclerView.smoothScrollToPosition(messageModels.size());
         replyAdapter.notifyDataSetChanged();
@@ -202,6 +236,8 @@ public class ReplyActivity extends AppCompatActivity {
                         messageText.setText("");
                         Map<String, Object> user = new HashMap<>();
                         String messageKey = "text" + textNum;
+
+
 
                         if (mImageUri != null) {
                             StorageReference fileReference = mStoreRef.child(System.currentTimeMillis() + "." + getFileExt(mImageUri));
@@ -261,6 +297,11 @@ public class ReplyActivity extends AppCompatActivity {
                                 @Override
                                 public void onSuccess(Void aVoid) {
                                     readMessage();
+                                    if(notify && !chatTitle.equals(ReplyActivity.this.getString(R.string.your)))
+                                    {
+                                        sendNotification(chatTitle,userID,message);
+                                    }
+                                    notify = false;
                                     //Toast.makeText(ChatActivity.this, R.string.Messagesent, Toast.LENGTH_SHORT).show();
                                 }
                             });
@@ -274,6 +315,34 @@ public class ReplyActivity extends AppCompatActivity {
             Log.d("Error123",e.getMessage());
         }
     }
+
+    private void sendNotification(String chatTitle, String userID, String message) {
+        DocumentReference getToken = fstore.collection("users").document(chatTitle);
+        getToken.addSnapshotListener(ReplyActivity.this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if(value!=null)
+                {
+                    Token token = new Token(value.get("token").toString());
+                    Data data = new Data(userID, message, "1", chatTitle, cropCode, queeryMessage, R.drawable.logo_green);
+                    Sender sender =  new Sender(data, token.getToken());
+                    apiService.sendNotification(sender)
+                            .enqueue(new Callback<Response>() {
+                                @Override
+                                public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                                    //Toast.makeText(ReplyActivity.this, "Notification Sent", Toast.LENGTH_SHORT).show();
+                                }
+
+                                @Override
+                                public void onFailure(Call<Response> call, Throwable t) {
+                                    //Toast.makeText(ReplyActivity.this, "Notification Failed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                }
+            }
+        });
+    }
+
     private void readMessage(){
         DocumentReference documentReference = fstore.collection("forums").document(cropCode);
         documentReference.addSnapshotListener(ReplyActivity.this, new EventListener<DocumentSnapshot>() {

@@ -30,6 +30,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.ngsolutions.myapplication.Model.cropInfo;
 
 import org.json.JSONArray;
@@ -132,7 +133,7 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
     String cropCodeInt="0";
     String cropNum;
     String[] crop= new String[6];
-    String userName;
+    String userName,token;
     Button addCropButton;
     ImageButton backButton;
     ArrayList<cropInfo> c = new ArrayList<cropInfo>();
@@ -179,10 +180,13 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
                 try {
                     //Toast.makeText(SuggestCropActivity.this, "problem in catch", Toast.LENGTH_SHORT).show();
                     userName = value.get("userName").toString();
+                    token = value.get("token").toString();
+
                 }
                 catch (Exception e)
                 {
                     userName="";
+                    token= FirebaseInstanceId.getInstance().getToken();
                     //Toast.makeText(SuggestCropActivity.this, "No problem in catch", Toast.LENGTH_SHORT).show();
                 }
 
@@ -255,6 +259,8 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
                         user.put("crop5", crop[5]);
                         if(!userName.isEmpty())
                             user.put("userName",userName);
+                        if(!token.isEmpty())
+                            user.put("token",token);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

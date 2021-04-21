@@ -153,10 +153,12 @@
         android:textColor="@color/white"
         android:textSize="22dp"
         android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="@+id/WindSpeedTextView"
         app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toStartOf="@+id/WindSpeedTextView" />
+        app:layout_constraintStart_toStartOf="@+id/WindSpeedTextView"
+        app:layout_constraintTop_toTopOf="@+id/DescriptionTextView" />
 
     <TextView
         android:id="@+id/GreetCityTextView"
@@ -207,9 +209,9 @@
         android:layout_marginStart="32dp"
         android:elevation="4dp"
         android:src="@drawable/humidity"
-        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+        app:layout_constraintBottom_toBottomOf="@+id/IconImageView"
         app:layout_constraintStart_toEndOf="@+id/HumidityTextView"
-        app:layout_constraintTop_toTopOf="@+id/HumidityTextView" />
+        app:layout_constraintTop_toTopOf="@+id/IconImageView" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/PB3"

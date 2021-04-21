@@ -81,4 +81,5 @@
     <string name="write_message">"संदेश लिहा "</string>
     <string name="compressing_image">"छोटी प्रतिमा बनवित आहे "</string>
     <string name="no_internet_connection">"इंटरनेट कनेक्शन उपलब्ध नाही "</string>
+    <string name="querry_answered">"आपल्या प्रश्नाचे उत्तर दिले आहे "</string>
 </resources>

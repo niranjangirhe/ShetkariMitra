@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -56,7 +57,7 @@ public class SuggestCropActivity extends AppCompatActivity {
     String cropNum;
     String[] crop= new String[6];
     ProgressBar progressBar;
-    String userName;
+    String userName,token;
     String url="https://www.soilhealth.dac.gov.in/calculator/calculator";
     private RequestQueue mQueue;
     @Override
@@ -112,10 +113,12 @@ public class SuggestCropActivity extends AppCompatActivity {
                     try {
                         //Toast.makeText(SuggestCropActivity.this, "problem in catch", Toast.LENGTH_SHORT).show();
                         userName = value.get("userName").toString();
+                        token = value.get("token").toString();
                     }
                     catch (Exception e)
                     {
                         userName="";
+                        token=FirebaseInstanceId.getInstance().getToken();
                         //Toast.makeText(SuggestCropActivity.this, "No problem in catch", Toast.LENGTH_SHORT).show();
                     }
 
@@ -158,6 +161,8 @@ public class SuggestCropActivity extends AppCompatActivity {
                         user.put("crop5", crop[5]);
                         if(!userName.isEmpty())
                             user.put("userName",userName);
+                        if(!token.isEmpty())
+                            user.put("token",token);
                         documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {

@@ -74,8 +74,8 @@
 
     <ImageView
         android:id="@+id/TodayWeatherIcon"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:layout_constraintBottom_toTopOf="@+id/imageView17"
         app:layout_constraintEnd_toEndOf="@+id/imageView16"
         app:layout_constraintHorizontal_bias="0.108"
@@ -103,7 +103,7 @@
         android:id="@+id/TempNowText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         android:fontFamily="sans-serif"
         android:text="Temperature 23 °C"

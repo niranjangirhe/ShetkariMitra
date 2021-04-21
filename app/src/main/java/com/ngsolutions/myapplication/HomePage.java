@@ -7,13 +7,10 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -24,7 +21,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,14 +35,18 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdReceiver;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
+import com.ngsolutions.myapplication.Model.WeatherData;
 
 import org.json.JSONObject;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -103,6 +103,8 @@ public class HomePage extends AppCompatActivity {
         Auth = FirebaseAuth.getInstance();
         fstore = FirebaseFirestore.getInstance();
         userID = Auth.getCurrentUser().getUid();
+        updateToken();
+
         DocumentReference documentReference = fstore.collection("users").document(userID);
         documentReference.addSnapshotListener(HomePage.this, new EventListener<DocumentSnapshot>() {
             @Override
@@ -193,6 +195,11 @@ public class HomePage extends AppCompatActivity {
         super.onResume();
         greetCity.setText(getString(R.string.Greetings)+userName);
         getLocation();
+        SharedPreferences sp = getSharedPreferences("SP_USER",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putString("Current_USERID",userID);
+        editor.apply();
+        //Toast.makeText(this, userID, Toast.LENGTH_SHORT).show();
     }
 
     private void getLocation() {
@@ -228,8 +235,18 @@ public class HomePage extends AppCompatActivity {
             });
         }
     }
-
-
+    private void updateToken()
+    {
+        DocumentReference tokenUpdater = fstore.collection("users").document(userID);
+        Map<String,Object> tk = new HashMap<>();
+        tk.put("token",FirebaseInstanceId.getInstance().getToken());
+        tokenUpdater.update(tk).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                //Toast.makeText(HomePage.this, "Token Updated", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

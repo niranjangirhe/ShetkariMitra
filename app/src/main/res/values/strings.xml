@@ -80,5 +80,6 @@
     <string name="write_message">Write Message</string>
     <string name="compressing_image">Compressing Image</string>
     <string name="no_internet_connection">No Internet Connection</string>
+    <string name="querry_answered">Your query is answered</string>
 
 </resources>

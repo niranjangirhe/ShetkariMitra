@@ -230,6 +230,21 @@ public class ChatActivity extends AppCompatActivity {
         }
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        DocumentReference documentReference = fstore.collection("forums").document(cropCode);
+        documentReference.addSnapshotListener(ChatActivity.this, new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                if (value.exists()) {
+                    if(Integer.parseInt(value.get("textNum").toString())>0) {
+                        readMessage();
+                    }
+                }
+            }
+        });
+    }
 
     private static Uri getUriFromBitmap(Bitmap bitmap, int quality, Context context)
     {
@@ -433,7 +448,7 @@ public class ChatActivity extends AppCompatActivity {
     {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
         Date resultdate = new Date(Long.parseLong(dateinmill));
-        return DateFormat.format("dd/MM/yy", resultdate).toString();
+        return DateFormat.format("dd/MM/yy HH:mm", resultdate).toString();
 
     }
     private void checkIfPresent() {

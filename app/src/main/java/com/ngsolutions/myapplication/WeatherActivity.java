@@ -12,13 +12,10 @@ import android.content.Intent;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,13 +34,13 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.ngsolutions.myapplication.HelperClasses.HomeAddapter.FeaturedAdapter;
 import com.ngsolutions.myapplication.HelperClasses.HomeAddapter.FeaturedHelperClass;
+import com.ngsolutions.myapplication.Model.WeatherForecast;
 
 import org.json.JSONObject;
 
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
 import java.util.Locale;
 
 
