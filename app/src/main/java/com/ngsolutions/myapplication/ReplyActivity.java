@@ -268,6 +268,11 @@ public class ReplyActivity extends AppCompatActivity {
                                                                 @Override
                                                                 public void onSuccess(Void aVoid) {
                                                                     readMessage();
+                                                                    if(notify && !chatTitle.equals(ReplyActivity.this.getString(R.string.your)))
+                                                                    {
+                                                                        sendNotification(chatTitle,userID,message);
+                                                                    }
+                                                                    notify = false;
                                                                     //Toast.makeText(ChatActivity.this, R.string.Messagesent, Toast.LENGTH_SHORT).show();
                                                                 }
                                                             });
@@ -324,7 +329,7 @@ public class ReplyActivity extends AppCompatActivity {
                 if(value!=null)
                 {
                     Token token = new Token(value.get("token").toString());
-                    Data data = new Data(userID, message, "1", chatTitle, cropCode, queeryMessage, R.drawable.logo_green);
+                    Data data = new Data(userID, message, "1", chatTitle, cropCode, queeryMessage, R.drawable.logo_green_notification);
                     Sender sender =  new Sender(data, token.getToken());
                     apiService.sendNotification(sender)
                             .enqueue(new Callback<Response>() {
@@ -422,8 +427,7 @@ public class ReplyActivity extends AppCompatActivity {
     {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
         Date resultdate = new Date(Long.parseLong(dateinmill));
-        return DateFormat.format("dd/MM/yy", resultdate).toString();
-
+        return DateFormat.format("HH:mm  dd/MM/yy", resultdate).toString();
     }
     private void setLocale(String lang)
     {

@@ -448,7 +448,7 @@ public class ChatActivity extends AppCompatActivity {
     {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
         Date resultdate = new Date(Long.parseLong(dateinmill));
-        return DateFormat.format("dd/MM/yy HH:mm", resultdate).toString();
+        return DateFormat.format("HH:mm  dd/MM/yy", resultdate).toString();
 
     }
     private void checkIfPresent() {
