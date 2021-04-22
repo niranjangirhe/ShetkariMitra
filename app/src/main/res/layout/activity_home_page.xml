@@ -9,29 +9,27 @@
 
     <ImageView
         android:id="@+id/WeatherImg"
-        android:layout_width="match_parent"
-        android:layout_height="275dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:layout_alignParentLeft="true"
         android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/GreetCityTextView"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/weather_button" />
 
     <ImageButton
         android:id="@+id/SettingBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:backgroundTint="@color/transparent"
-        app:layout_constraintBottom_toBottomOf="@+id/WeatherImg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.057"
         app:srcCompat="@drawable/setting_icon" />
 
     <Button
@@ -164,17 +162,16 @@
         android:id="@+id/GreetCityTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/greetings"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.02" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/IconImageView"

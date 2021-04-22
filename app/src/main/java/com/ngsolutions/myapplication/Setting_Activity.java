@@ -133,7 +133,7 @@ public class Setting_Activity extends AppCompatActivity {
                             userName = "";
                         }
                         if(userName.isEmpty() && yourName.getText().toString().isEmpty()) {
-                            Toast.makeText(Setting_Activity.this, "Enter Valid Name", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Setting_Activity.this, getString(R.string.enter_valid_name), Toast.LENGTH_SHORT).show();
                             return;
                         }
                         if(!yourName.getText().toString().isEmpty()) {
