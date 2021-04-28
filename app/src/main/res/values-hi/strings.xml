@@ -82,4 +82,7 @@
     <string name="compressing_image">"छोटी छवि बना रहा हूं "</string>
     <string name="no_internet_connection">"इंटरनेट कनेक्शन उपलब्ध नहीं है "</string>
     <string name="querry_answered">"आपके प्रश्न का उत्तर दिया गया है "</string>
+    <string name="enter_valid_name">"मान्य नाम दर्ज करें "</string>
+    <string name="message_delete">"संदेश हटाया गया "</string>
+    <string name="update_app">"कृपया पुढे जाण्यासाठी अॅप अद्यतनित करा "</string>
 </resources>
