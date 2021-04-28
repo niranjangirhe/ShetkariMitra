@@ -3,6 +3,7 @@ package com.ngsolutions.myapplication.HelperClasses.HomeAddapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -27,7 +29,11 @@ import com.ngsolutions.myapplication.R;
 import com.ngsolutions.myapplication.ReplyActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ReplyAdapter extends  RecyclerView.Adapter{
 
@@ -35,6 +41,7 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
     Context context;
     FirebaseAuth Auth;
     FirebaseFirestore fstore;
+    String cropCode,userID;
 
     int SENDER_VIEW = 1;
     int RECEIVER_VIEW = 2;
@@ -42,9 +49,11 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
     int SENDER_VIEW_IMAGE = 4;
     int RECEIVER_VIEW_IMAGE = 5;
 
-    public ReplyAdapter(ArrayList<MessageModel> messageModels, Context context) {
+    public ReplyAdapter(ArrayList<MessageModel> messageModels, Context context,String cropCode, String userID) {
         this.messageModels = messageModels;
         this.context = context;
+        this.cropCode = cropCode;
+        this.userID = userID;
     }
 
     @Override
@@ -112,11 +121,42 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
         }
         else if(holder.getClass()== SenderViewHolder.class)
         {
-            ((SenderViewHolder) holder).senderMessage.setText(messageModel.getMessage());
-            ((SenderViewHolder) holder).time.setText(messageModel.getTime());
+            Auth = FirebaseAuth.getInstance();
+            fstore = FirebaseFirestore.getInstance();
+            ((SenderViewHolder) holder).time.setText(getDate(messageModel.getTime()));
+            if(messageModel.getMessage().equals("message is deleted"))
+            {
+                ((SenderViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                ((SenderViewHolder) holder).senderMessage.setText(R.string.message_delete);
+                ((SenderViewHolder) holder).delete.setVisibility(View.GONE);
+            }
+            else {
+                ((SenderViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white));
+                ((SenderViewHolder) holder).senderMessage.setText(messageModel.getMessage());
+                ((SenderViewHolder) holder).delete.setVisibility(View.VISIBLE);
+                ((SenderViewHolder) holder).delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        messageModel.setMessage("message is deleted");
+                        Map<String, Object> user = new HashMap<>();
+                        user.put(messageModel.getKey(), userID + "~" + messageModel.getTime() + "||message is deleted");
+                        DocumentReference addForum = fstore.collection("forums").document(cropCode);
+                        addForum.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                ((SenderViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                                ((SenderViewHolder) holder).senderMessage.setText(R.string.message_delete);
+                                ((SenderViewHolder) holder).delete.setVisibility(View.GONE);
+                                Toast.makeText(context, R.string.message_delete, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
         }
         else if(holder.getClass()== ReceiverViewHolder.class)
         {
+            ((ReceiverViewHolder) holder).time.setText(getDate(messageModel.getTime()));
             Auth = FirebaseAuth.getInstance();
             fstore = FirebaseFirestore.getInstance();
             DocumentReference documentReference = fstore.collection("users").document(messageModel.getName());
@@ -128,20 +168,61 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
                     }
                 }
             });
-            ((ReceiverViewHolder) holder).recieverMessage.setText(messageModel.getMessage());
-            ((ReceiverViewHolder) holder).time.setText(messageModel.getTime());
+            if(messageModel.getMessage().equals("message is deleted"))
+            {
+                ((ReceiverViewHolder) holder).recieverMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                ((ReceiverViewHolder) holder).recieverMessage.setText(R.string.message_delete);
+            }
+            else {
+                ((ReceiverViewHolder) holder).recieverMessage.setTextColor(context.getResources().getColor(R.color.white));
+                ((ReceiverViewHolder) holder).recieverMessage.setText(messageModel.getMessage());
+            }
         }
         else if(holder.getClass()== SenderImageViewHolder.class)
         {
-            ((SenderImageViewHolder) holder).senderMessage.setText(messageModel.getMessage());
-            ImageView imageview = ((SenderImageViewHolder) holder).senderImageView;
-            ((SenderImageViewHolder) holder).time.setText(messageModel.getTime());
-            Picasso.with(context).load(messageModel.getUri()).fit().centerCrop().into(imageview);
+            ((SenderImageViewHolder) holder).time.setText(getDate(messageModel.getTime()));
+            Auth = FirebaseAuth.getInstance();
+            fstore = FirebaseFirestore.getInstance();
+            if(messageModel.getMessage().equals("message is deleted"))
+            {
+                ((SenderImageViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                ((SenderImageViewHolder) holder).senderMessage.setText(R.string.message_delete);
+                ((SenderImageViewHolder) holder).delete.setVisibility(View.GONE);
+                ((SenderImageViewHolder) holder).senderImageView.setVisibility(View.GONE);
+            }
+            else {
+                ((SenderImageViewHolder) holder).delete.setVisibility(View.VISIBLE);
+                ((SenderImageViewHolder) holder).senderImageView.setVisibility(View.VISIBLE);
+                ((SenderImageViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white));
+                ((SenderImageViewHolder) holder).senderMessage.setText(messageModel.getMessage());
+                ImageView imageview = ((SenderImageViewHolder) holder).senderImageView;
+                Picasso.with(context).load(messageModel.getUri()).fit().centerCrop().into(imageview);
+                ((SenderImageViewHolder) holder).delete.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        messageModel.setMessage("message is deleted");
+                        Map<String, Object> user = new HashMap<>();
+                        user.put(messageModel.getKey(), userID + "~" + messageModel.getTime() + "||message is deleted");
+                        DocumentReference addForum = fstore.collection("forums").document(cropCode);
+                        addForum.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                ((SenderImageViewHolder) holder).senderMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                                ((SenderImageViewHolder) holder).senderMessage.setText(R.string.message_delete);
+                                ((SenderImageViewHolder) holder).delete.setVisibility(View.GONE);
+                                ((SenderImageViewHolder) holder).senderImageView.setVisibility(View.GONE);
+                                Toast.makeText(context, R.string.message_delete, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
+                });
+            }
         }
         else if(holder.getClass()== ReceiverImageViewHolder.class)
         {
             Auth = FirebaseAuth.getInstance();
             fstore = FirebaseFirestore.getInstance();
+            ((ReceiverImageViewHolder) holder).time.setText(getDate(messageModel.getTime()));
             DocumentReference documentReference = fstore.collection("users").document(messageModel.getName());
             documentReference.addSnapshotListener((Activity) context, new EventListener<DocumentSnapshot>() {
                 @Override
@@ -151,11 +232,28 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
                     }
                 }
             });
-            ((ReceiverImageViewHolder) holder).time.setText(messageModel.getTime());
-            ((ReceiverImageViewHolder) holder).recieverMessage.setText(messageModel.getMessage());
-            ImageView imageview = ((ReceiverImageViewHolder) holder).receiverImageView;
-            Picasso.with(context).load(messageModel.getUri()).fit().centerCrop().into(imageview);
+            if(messageModel.getMessage().equals("message is deleted"))
+            {
+                ((ReceiverImageViewHolder) holder).recieverMessage.setText(R.string.message_delete);
+                ((ReceiverImageViewHolder) holder).recieverMessage.setTextColor(context.getResources().getColor(R.color.white40));
+                ((ReceiverImageViewHolder) holder).receiverImageView.setVisibility(View.GONE);
+            }
+            else {
+                ((ReceiverImageViewHolder) holder).recieverMessage.setTextColor(context.getResources().getColor(R.color.white));
+                ((ReceiverImageViewHolder) holder).recieverMessage.setText(messageModel.getMessage());
+                ImageView imageview = ((ReceiverImageViewHolder) holder).receiverImageView;
+                ((ReceiverImageViewHolder) holder).receiverImageView.setVisibility(View.VISIBLE);
+                Picasso.with(context).load(messageModel.getUri()).fit().centerCrop().into(imageview);
+            }
         }
+    }
+
+    private String getDate(String dateinmill)
+    {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
+        Date resultdate = new Date(Long.parseLong(dateinmill));
+        return DateFormat.format("HH:mm  dd/MM/yy", resultdate).toString();
+
     }
 
     @Override
@@ -174,10 +272,12 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
     }
     public class SenderViewHolder extends RecyclerView.ViewHolder {
         TextView senderMessage,time;
+        ImageButton delete;
         public SenderViewHolder(@NonNull View itemView) {
             super(itemView);
-            senderMessage = itemView.findViewById(R.id.SenderText);
+            senderMessage = itemView.findViewById(R.id.SenderReplyText);
             time = itemView.findViewById(R.id.Time_ssr);
+            delete = itemView.findViewById(R.id.SenderReplyTextDelete);
         }
     }
     public class QuerryViewHolder extends RecyclerView.ViewHolder {
@@ -190,11 +290,13 @@ public class ReplyAdapter extends  RecyclerView.Adapter{
     public class SenderImageViewHolder extends RecyclerView.ViewHolder {
         TextView senderMessage,time;
         ImageView senderImageView;
+        ImageButton delete;
         public SenderImageViewHolder(@NonNull View itemView) {
             super(itemView);
             senderMessage = itemView.findViewById(R.id.SenderImageTextReply);
             senderImageView = itemView.findViewById(R.id.senderImageViewReply);
             time = itemView.findViewById(R.id.Time_rsi);
+            delete = itemView.findViewById(R.id.senderImageViewReplydelete);
         }
     }
     public class ReceiverImageViewHolder extends RecyclerView.ViewHolder {

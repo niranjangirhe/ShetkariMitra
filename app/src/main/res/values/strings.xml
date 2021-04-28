@@ -82,5 +82,6 @@
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="querry_answered">Your query is answered</string>
     <string name="enter_valid_name">Enter Valid Name</string>
+    <string name="message_delete">Message deleted</string>
 
 </resources>

@@ -136,7 +136,7 @@ public class ReplyActivity extends AppCompatActivity {
             chatTitleText.setText(chatTitle + " "+getString(R.string.query));
             queeryMessage = (String) b.get("message");
             checkIfPresent();
-            replyAdapter = new ReplyAdapter(messageModels, ReplyActivity.this);
+            replyAdapter = new ReplyAdapter(messageModels, ReplyActivity.this,cropCode,userID);
             chatRecyclerView.setAdapter(replyAdapter);
         }
         else {
@@ -365,34 +365,34 @@ public class ReplyActivity extends AppCompatActivity {
                         int time = sender.indexOf("||");
                         int imageLink = sender.indexOf("^^");
                         String mtime = "";
-                        mtime = getDate(sender.substring(index+1,time));
+                        mtime = sender.substring(index+1,time);
                         if (imageLink > 0) {
                             String message = sender.substring(time+ 2,imageLink);
                             String ImageUri = sender.substring(imageLink + 2);
                             sender = sender.substring(0, index);
                             Uri uri = Uri.parse(ImageUri);
                             if (sender.equals(userID)) {
-                                MessageModel messageModel = new MessageModel("", message, true, uri, true,Integer.toString(i),mtime);
+                                MessageModel messageModel = new MessageModel("", message, true, uri, true,Integer.toString(i),mtime,Key1);
                                 messageModels.add(messageModel);
                             } else {
-                                MessageModel messageModel = new MessageModel(sender, message, false, uri, true,Integer.toString(i),mtime);
+                                MessageModel messageModel = new MessageModel(sender, message, false, uri, true,Integer.toString(i),mtime,Key1);
                                 messageModels.add(messageModel);
                             }
                         } else {
                             String message = sender.substring(time + 2);
                             sender = sender.substring(0, index);
                             if (sender.equals(userID)) {
-                                MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime);
+                                MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime,Key1);
                                 messageModels.add(messageModel);
                             } else {
-                                MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime);
+                                MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime,Key1);
                                 messageModels.add(messageModel);
                             }
                         }
                     }
                     else
                     {
-                        MessageModel messageModel1 = new MessageModel("a", queeryMessage, true,Integer.toString(i),"");
+                        MessageModel messageModel1 = new MessageModel("a", queeryMessage, true,Integer.toString(i),"",Key1);
                         messageModels.add(messageModel1);
                     }
                 }
@@ -423,12 +423,7 @@ public class ReplyActivity extends AppCompatActivity {
             }
         });
     }
-    private String getDate(String dateinmill)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
-        Date resultdate = new Date(Long.parseLong(dateinmill));
-        return DateFormat.format("HH:mm  dd/MM/yy", resultdate).toString();
-    }
+
     private void setLocale(String lang)
     {
         Locale locale = new Locale(lang);

@@ -3,11 +3,13 @@ package com.ngsolutions.myapplication.Model;
 import android.net.Uri;
 
 public class MessageModel {
-    String Name,Message,index,time;
+    String Name,Message,index,time,key;
     Boolean SorR,haveImage=false;
     Uri uri=null;
 
-    public MessageModel(String name, String message, Boolean sorR, Uri uri, Boolean haveImage,String index,String time) {
+
+
+    public MessageModel(String name, String message, Boolean sorR, Uri uri, Boolean haveImage, String index, String time, String key) {
         Name = name;
         Message = message;
         SorR = sorR;
@@ -15,14 +17,19 @@ public class MessageModel {
         this.haveImage = haveImage;
         this.index = index;
         this.time = time;
+        this.key = key;
     }
 
-    public MessageModel(String name, String message, Boolean sorR, String index,String time) {
+    public MessageModel(String name, String message, Boolean sorR, String index,String time, String key) {
         Name = name;
         Message = message;
         SorR = sorR;
         this.index = index;
         this.time = time;
+        this.key = key;
+    }
+    public String getKey() {
+        return key;
     }
 
     public String getTime() {

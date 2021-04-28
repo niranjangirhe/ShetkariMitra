@@ -279,7 +279,7 @@ public class ChatActivity extends AppCompatActivity {
                     int time = sender.indexOf("||");
                     int imageLink = sender.indexOf("^^");
                     String mtime = "";
-                    mtime = getDate(sender.substring(index+1,time));
+                    mtime = sender.substring(index+1,time);
                     //Toast.makeText(ChatActivity.this, Integer.toString(imageLink), Toast.LENGTH_SHORT).show();
                     if(imageLink>0)
                     {
@@ -288,10 +288,10 @@ public class ChatActivity extends AppCompatActivity {
                         sender = sender.substring(0, index);
                         Uri uri = Uri.parse(ImageUri);
                         if (sender.equals(userID)) {
-                            MessageModel messageModel = new MessageModel("", message, true,uri,true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel("", message, true,uri,true,Integer.toString(i),mtime,Key1);
                             messageModels.add(0,messageModel);
                         } else {
-                            MessageModel messageModel = new MessageModel(sender, message, false,uri,true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel(sender, message, false,uri,true,Integer.toString(i),mtime,Key1);
                             messageModels.add(0,messageModel);
                         }
                     }
@@ -299,10 +299,10 @@ public class ChatActivity extends AppCompatActivity {
                         String message = sender.substring(time + 2);
                         sender = sender.substring(0, index);
                         if (sender.equals(userID)) {
-                            MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime,Key1);
                             messageModels.add(0,messageModel);
                         } else {
-                            MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime,Key1);
                             messageModels.add(0,messageModel);
                         }
                     }
@@ -410,8 +410,7 @@ public class ChatActivity extends AppCompatActivity {
                     int time = sender.indexOf("||");
                     int imageLink = sender.indexOf("^^");
                     String mtime = "";
-                    Log.d("TimeNow",getDate(sender.substring(index+1,time)));
-                    mtime = getDate(sender.substring(index+1,time));
+                    mtime = sender.substring(index+1,time);
                     //Toast.makeText(ChatActivity.this, Integer.toString(imageLink), Toast.LENGTH_SHORT).show();
                     if(imageLink>0)
                     {
@@ -420,10 +419,10 @@ public class ChatActivity extends AppCompatActivity {
                         sender = sender.substring(0, index);
                         Uri uri = Uri.parse(ImageUri);
                         if (sender.equals(userID)) {
-                            MessageModel messageModel = new MessageModel("", message, true,uri,true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel("", message, true,uri,true,Integer.toString(i),mtime,Key1);
                             messageModels.add(messageModel);
                         } else {
-                            MessageModel messageModel = new MessageModel(sender, message, false,uri,true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel(sender, message, false,uri,true,Integer.toString(i),mtime,Key1);
                             messageModels.add(messageModel);
                         }
                     }
@@ -431,10 +430,10 @@ public class ChatActivity extends AppCompatActivity {
                         String message = sender.substring(time + 2);
                         sender = sender.substring(0, index);
                         if (sender.equals(userID)) {
-                            MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel("", message, true,Integer.toString(i),mtime,Key1);
                             messageModels.add(messageModel);
                         } else {
-                            MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime);
+                            MessageModel messageModel = new MessageModel(sender, message, false,Integer.toString(i),mtime,Key1);
                             messageModels.add(messageModel);
                         }
                     }
@@ -444,13 +443,7 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
-    private String getDate(String dateinmill)
-    {
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd,yyyy HH:mm");
-        Date resultdate = new Date(Long.parseLong(dateinmill));
-        return DateFormat.format("HH:mm  dd/MM/yy", resultdate).toString();
 
-    }
     private void checkIfPresent() {
         Auth = FirebaseAuth.getInstance();
         fstore =FirebaseFirestore.getInstance();
