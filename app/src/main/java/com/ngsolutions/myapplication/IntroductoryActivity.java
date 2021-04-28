@@ -1,5 +1,6 @@
 package com.ngsolutions.myapplication;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,6 +23,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -32,6 +37,7 @@ public class IntroductoryActivity extends AppCompatActivity {
     private AlertDialog.Builder dialogBuilder;
     private AlertDialog dialog;
     FirebaseAuth Auth;
+    FirebaseFirestore fstore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,17 +52,38 @@ public class IntroductoryActivity extends AppCompatActivity {
         if(isConnected()) {
             Auth = FirebaseAuth.getInstance();
             FirebaseUser user = Auth.getCurrentUser();
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
+            fstore = FirebaseFirestore.getInstance();
+            DocumentReference documentReference = fstore.collection("Mics").document("version info");
+            documentReference.addSnapshotListener(IntroductoryActivity.this, new EventListener<DocumentSnapshot>() {
                 @Override
-                public void run() {
-                    if (user != null) {
-                        sendToHome();
-                    } else {
-                        sendToMain();
+                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                    if(value.get("version").toString().equals("1.24.4"))
+                    {
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (user != null) {
+                                    sendToHome();
+                                } else {
+                                    sendToMain();
+                                }
+                            }
+                        }, 3000);
+                    }
+                    else
+                    {
+                        Toast.makeText(IntroductoryActivity.this, R.string.update_app, Toast.LENGTH_SHORT).show();
+                        Handler handler = new Handler();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                               finish();
+                            }
+                        }, 3000);
                     }
                 }
-            }, 3000);
+            });
         }
         else
         {
