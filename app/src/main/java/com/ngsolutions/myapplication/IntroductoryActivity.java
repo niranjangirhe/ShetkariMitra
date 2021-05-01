@@ -14,11 +14,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -27,6 +34,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -38,6 +48,7 @@ public class IntroductoryActivity extends AppCompatActivity {
     private AlertDialog dialog;
     FirebaseAuth Auth;
     FirebaseFirestore fstore;
+    private RequestQueue mQueue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,38 +63,52 @@ public class IntroductoryActivity extends AppCompatActivity {
         if(isConnected()) {
             Auth = FirebaseAuth.getInstance();
             FirebaseUser user = Auth.getCurrentUser();
-            fstore = FirebaseFirestore.getInstance();
-            DocumentReference documentReference = fstore.collection("Mics").document("version info");
-            documentReference.addSnapshotListener(IntroductoryActivity.this, new EventListener<DocumentSnapshot>() {
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
-                    if(value.get("version").toString().equals("1.24.4"))
-                    {
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (user != null) {
-                                    sendToHome();
-                                } else {
-                                    sendToMain();
+            mQueue = Volley.newRequestQueue(this);
+            JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "https://raw.githubusercontent.com/niranjangirhe/shetkarimitratemprepo/main/version.json", null,
+                    new Response.Listener<JSONArray>() {
+                        @Override
+                        public void onResponse(JSONArray response) {
+                            try{
+                                //Toast.makeText(IntroductoryActivity.this, response.getJSONObject(0).getString("version"), Toast.LENGTH_SHORT).show();
+                                if(response.getJSONObject(0).getString("version").equals("1.24.6"))
+                                {
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            if (user != null) {
+                                                sendToHome();
+                                            } else {
+                                                sendToMain();
+                                            }
+                                        }
+                                    }, 3000);
                                 }
+                                else
+                                {
+                                    Toast.makeText(IntroductoryActivity.this, R.string.update_app, Toast.LENGTH_SHORT).show();
+                                    Handler handler = new Handler();
+                                    handler.postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            finish();
+                                        }
+                                    }, 3000);
+                                }
+
+                            } catch (JSONException e) {
+
                             }
-                        }, 3000);
-                    }
-                    else
-                    {
-                        Toast.makeText(IntroductoryActivity.this, R.string.update_app, Toast.LENGTH_SHORT).show();
-                        Handler handler = new Handler();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                               finish();
-                            }
-                        }, 3000);
-                    }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(IntroductoryActivity.this, "h1h"+error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             });
+            mQueue.add(request);
+
+
         }
         else
         {

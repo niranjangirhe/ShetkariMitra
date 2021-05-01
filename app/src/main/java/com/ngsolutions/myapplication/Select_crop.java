@@ -46,8 +46,8 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
 
     private Spinner spinnerState,spinnerDistrict,spinnerCrop;
     private RequestQueue mQueue;
-    String[] str = {
-            "--Select State/राज्य--",
+    String[] stren = {
+            "--Select State--",
             "Andaman And Nicobar Islands",
             "Andhra Pradesh",
             "Arunachal Pradesh",
@@ -84,6 +84,44 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
             "Uttar Pradesh",
             "Uttarakhand",
             "West Bengal"};
+    String[] strmr = {
+            "--राज्य निवडा--",
+            "अंदमान निकोबार बेटे",
+            "आंध्र प्रदेश",
+            "अरुणाचल प्रदेश",
+            "आसाम",
+            "बिहार",
+            "चंडीगड",
+            "छत्तीसगड",
+            "दिल्ली",
+            "गोवा",
+            "गुजरात",
+            "हरियाणा",
+            "हिमाचल प्रदेश",
+            "जम्मू आणि काश्मीर",
+            "झारखंड",
+            "कर्नाटक",
+            "केरळा",
+            "लडाख",
+            "लक्षद्वीप",
+            "मध्य प्रदेश",
+            "महाराष्ट्र",
+            "मणिपूर",
+            "मेघालय",
+            "मिझोरम",
+            "नागालँड",
+            "ओडिशा",
+            "पुडुचेरी",
+            "पंजाब",
+            "राजस्थान",
+            "सिक्किम",
+            "तामिळनाडू",
+            "तेलंगाना",
+            "दादरा आणि नगर हवेली आणि दमण आणि दीव",
+            "त्रिपुरा",
+            "उत्तर प्रदेश",
+            "उत्तराखंड",
+            "पश्चिम बंगाल"};
     String[] strCode = {
             "0",
             "35",
@@ -149,7 +187,10 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
         spinnerState.setOnItemSelectedListener(this);
         spinnerDistrict.setOnItemSelectedListener(this);
         spinnerCrop.setOnItemSelectedListener(this);
-        ArrayAdapter adapterState = new ArrayAdapter(this, R.layout.dropdown_item,str);
+        ArrayAdapter adapterState = new ArrayAdapter(this, R.layout.dropdown_item, strmr);
+        if(lang.contains("e")) {
+            adapterState = new ArrayAdapter(this, R.layout.dropdown_item, stren);
+        }
         ArrayAdapter adapterDistrict = new ArrayAdapter(this, R.layout.dropdown_item,district);
         ArrayAdapter adapterCrop = new ArrayAdapter(this, R.layout.dropdown_item, cropList);
         addCropButton = findViewById(R.id.AddCropSelectCropBtn);
@@ -357,15 +398,14 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
                                 }
                                 else {
                                     //cropList.add(s1);
-                                    cropCode.add(s2);
                                     try {
                                         int l=0;
                                         int r=c.size()-1;
                                         while(l <= r)
                                         {
-
                                                 int mid = l + (r - l)/2;
                                                 if (c.get(mid).getCropCode() == Integer.parseInt(s2)) {
+                                                    cropCode.add(s2);
                                                     if(lang.contains("m"))
                                                         cropList.add(c.get(mid).getCropMarathi());
                                                     else if(lang.contains("h"))
@@ -388,6 +428,7 @@ public class Select_crop extends AppCompatActivity implements AdapterView.OnItem
                                     catch (Exception e)
                                     {
                                         cropList.add(s1);
+                                        cropCode.add(s2);
                                     }
                                 }
                             } catch (JSONException e) {
