@@ -74,7 +74,8 @@ public class MyQueryActivity extends AppCompatActivity {
                                     replyArr.add(value.get(Integer.toString(i)).toString());
                                 }
                                 counter=0;
-                                fillView();
+                                if(replyArr.size()>0)
+                                    fillView();
                             }
                         }
                     }

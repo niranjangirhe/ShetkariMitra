@@ -106,7 +106,6 @@ public class Setting_Activity extends AppCompatActivity {
                 }
                 else
                 {
-                    Toast.makeText(Setting_Activity.this, "Yup", Toast.LENGTH_SHORT).show();
                     datafound=false;
                     Map<String, Object> data = new HashMap<>();
                     data.put("replyNum",0);

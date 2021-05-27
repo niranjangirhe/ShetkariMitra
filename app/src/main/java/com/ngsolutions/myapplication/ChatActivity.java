@@ -380,7 +380,6 @@ public class ChatActivity extends AppCompatActivity {
                                                                         }
                                                                         else
                                                                         {
-                                                                            Toast.makeText(ChatActivity.this, "Yup4", Toast.LENGTH_SHORT).show();
                                                                             Map<String, Object> data = new HashMap<>();
                                                                             data.put("replyNum",0);
                                                                             DocumentReference addReplies = fstore.collection("replies").document(userID);
@@ -445,7 +444,6 @@ public class ChatActivity extends AppCompatActivity {
                                         }
                                         else
                                         {
-                                            Toast.makeText(ChatActivity.this, "Yup4", Toast.LENGTH_SHORT).show();
                                             Map<String, Object> data = new HashMap<>();
                                             data.put("replyNum",0);
                                             DocumentReference addReplies = fstore.collection("replies").document(userID);
