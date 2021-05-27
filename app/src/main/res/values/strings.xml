@@ -84,5 +84,7 @@
     <string name="enter_valid_name">Enter Valid Name</string>
     <string name="message_delete">Message deleted</string>
     <string name="update_app">Please Update the app to proceed</string>
+    <string name="errorfecting">Error fetching data</string>
+    <string name="my_queries">My Queries</string>
 
 </resources>

@@ -63,6 +63,7 @@ public class IntroductoryActivity extends AppCompatActivity {
         if(isConnected()) {
             Auth = FirebaseAuth.getInstance();
             FirebaseUser user = Auth.getCurrentUser();
+            mQueue = null;
             mQueue = Volley.newRequestQueue(this);
             JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, "https://raw.githubusercontent.com/niranjangirhe/shetkarimitratemprepo/main/version.json", null,
                     new Response.Listener<JSONArray>() {
@@ -70,7 +71,7 @@ public class IntroductoryActivity extends AppCompatActivity {
                         public void onResponse(JSONArray response) {
                             try{
                                 //Toast.makeText(IntroductoryActivity.this, response.getJSONObject(0).getString("version"), Toast.LENGTH_SHORT).show();
-                                if(response.getJSONObject(0).getString("version").equals("1.24.6"))
+                                if(response.getJSONObject(0).getString("version").equals("1.33.1"))
                                 {
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {
@@ -103,7 +104,14 @@ public class IntroductoryActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(IntroductoryActivity.this, "h1h"+error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(IntroductoryActivity.this, R.string.errorfecting, Toast.LENGTH_SHORT).show();
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            finish();
+                        }
+                    }, 3000);
                 }
             });
             mQueue.add(request);

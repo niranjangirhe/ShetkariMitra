@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MyQueryActivity"
+    android:background="@drawable/background_mycrop">
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="-1dp"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/chat_uppertab" />
+
+    <TextView
+        android:id="@+id/MyQueryTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="@string/my_queries"
+        android:textColor="@color/white"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/BackBtnMyQueryScreen"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/backarrow"
+        app:layout_constraintBottom_toBottomOf="@+id/MyQueryTitle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/MyQueryTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/MyQueryRecycleview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+</androidx.constraintlayout.widget.ConstraintLayout>

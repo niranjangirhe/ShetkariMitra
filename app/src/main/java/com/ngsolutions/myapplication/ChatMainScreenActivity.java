@@ -38,6 +38,7 @@ public class ChatMainScreenActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private EditText userNameEditText;
     private Button saveName;
+    private ImageButton MyQueryButton;
     ImageView[] cropButton = new ImageView[6];
     TextView[] cropNameText = new TextView[6];
     ImageView commonForum;
@@ -74,6 +75,7 @@ public class ChatMainScreenActivity extends AppCompatActivity {
         cropButton[5]=findViewById(R.id.Chat6Tile);
         commonForum = findViewById(R.id.Chat8Tile);
         askDev=findViewById(R.id.Chat7Tile);
+        MyQueryButton = findViewById(R.id.MyQueryBtn);
 
 
 
@@ -84,6 +86,15 @@ public class ChatMainScreenActivity extends AppCompatActivity {
                 openHomeActivity.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 startActivityIfNeeded(openHomeActivity, 0);
                 finish();
+            }
+        });
+
+        MyQueryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ChatMainScreenActivity.this, MyQueryActivity.class);
+                intent.putExtra("userID", userID);
+                startActivity(intent);
             }
         });
         commonForum.setOnClickListener(new View.OnClickListener() {
@@ -223,6 +234,14 @@ public class ChatMainScreenActivity extends AppCompatActivity {
                 else
                 {
                     datafound=false;
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("replyNum",0);
+                    DocumentReference addReplies = fstore.collection("replies").document(userID);
+                    addReplies.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    });
                 }
                 if(cropNum=="000000")
                 {

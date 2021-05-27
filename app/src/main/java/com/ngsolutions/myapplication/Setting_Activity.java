@@ -106,7 +106,16 @@ public class Setting_Activity extends AppCompatActivity {
                 }
                 else
                 {
+                    Toast.makeText(Setting_Activity.this, "Yup", Toast.LENGTH_SHORT).show();
                     datafound=false;
+                    Map<String, Object> data = new HashMap<>();
+                    data.put("replyNum",0);
+                    DocumentReference addReplies = fstore.collection("replies").document(userID);
+                    addReplies.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                        }
+                    });
                 }
             }
         });
@@ -160,6 +169,7 @@ public class Setting_Activity extends AppCompatActivity {
                             user.put("crop4", "");
                             user.put("crop5", "");
                             user.put("token", FirebaseInstanceId.getInstance().getToken());
+
                             addname.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {

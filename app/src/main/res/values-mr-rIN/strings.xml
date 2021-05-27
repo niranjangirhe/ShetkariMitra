@@ -85,4 +85,6 @@
     <string name="enter_valid_name">"वैध नाव प्रविष्ट करा "</string>
     <string name="message_delete">"संदेश हटविला "</string>
     <string name="update_app">"कृपया आगे बढ़ने के लिए ऐप को अपडेट करें "</string>
+    <string name="errorfecting">"डेटा लाने में त्रुटि "</string>
+    <string name="my_queries">"माझे प्रश्न "</string>
 </resources>

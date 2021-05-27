@@ -84,6 +84,7 @@ public class ChatActivity extends AppCompatActivity {
     boolean isloading = false;
     boolean firstTime = true;
     String name;
+    boolean noRep;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -355,8 +356,43 @@ public class ChatActivity extends AppCompatActivity {
                                                         addForum.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                             @Override
                                                             public void onSuccess(Void aVoid) {
+                                                                //here
+                                                                noRep = true;
+                                                                DocumentReference addSubmission = fstore.collection("replies").document(userID);
+                                                                addSubmission.addSnapshotListener(ChatActivity.this, new EventListener<DocumentSnapshot>() {
+                                                                    @Override
+                                                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                                                        if(value.exists())
+                                                                        {
+                                                                            if(noRep) {
+                                                                                noRep=false;
+                                                                                int replyNum = Integer.parseInt(value.get("replyNum").toString());
+                                                                                Map<String, Object> data = new HashMap<>();
+                                                                                data.put(Integer.toString(replyNum), "r" + cropCode + "~" + Integer.toString(textNum));
+                                                                                data.put("replyNum", replyNum + 1);
+                                                                                addSubmission.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                    @Override
+                                                                                    public void onSuccess(Void aVoid) {
+
+                                                                                    }
+                                                                                });
+                                                                            }
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            Toast.makeText(ChatActivity.this, "Yup4", Toast.LENGTH_SHORT).show();
+                                                                            Map<String, Object> data = new HashMap<>();
+                                                                            data.put("replyNum",0);
+                                                                            DocumentReference addReplies = fstore.collection("replies").document(userID);
+                                                                            addReplies.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                @Override
+                                                                                public void onSuccess(Void aVoid) {
+                                                                                }
+                                                                            });
+                                                                        }
+                                                                    }
+                                                                });
                                                                 readMessage();
-                                                                //Toast.makeText(ChatActivity.this, R.string.Messagesent, Toast.LENGTH_SHORT).show();
                                                             }
                                                         });
                                                     }
@@ -385,8 +421,43 @@ public class ChatActivity extends AppCompatActivity {
                         addForum.update(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
+                                //here
+                                noRep = true;
+                                DocumentReference addSubmission = fstore.collection("replies").document(userID);
+                                addSubmission.addSnapshotListener(ChatActivity.this, new EventListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                        if(value.exists())
+                                        {
+                                            if(noRep) {
+                                                noRep=false;
+                                                int replyNum = Integer.parseInt(value.get("replyNum").toString());
+                                                Map<String, Object> data = new HashMap<>();
+                                                data.put(Integer.toString(replyNum), "r" + cropCode + "~" + Integer.toString(textNum));
+                                                data.put("replyNum", replyNum + 1);
+                                                addSubmission.update(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+
+                                                    }
+                                                });
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(ChatActivity.this, "Yup4", Toast.LENGTH_SHORT).show();
+                                            Map<String, Object> data = new HashMap<>();
+                                            data.put("replyNum",0);
+                                            DocumentReference addReplies = fstore.collection("replies").document(userID);
+                                            addReplies.set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                @Override
+                                                public void onSuccess(Void aVoid) {
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
                                 readMessage();
-                                //Toast.makeText(ChatActivity.this, R.string.Messagesent, Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

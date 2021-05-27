@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/MyqueriesBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/my_query_tile" />
+
+    <TextView
+        android:id="@+id/MyQueryCropName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-black"
+        android:maxWidth="250dp"
+        android:maxLines="1"
+        android:text="Crop Name"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/MyQueryMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxWidth="250dp"
+        android:maxLines="2"
+        android:text="Your Message khsdkl dfknjksd ndsf kjsdnbf fnsdnf fsdkjfhnmsd sefinsd skdnjflknsd"
+        android:textColor="@color/green60"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="@+id/MyQueryCropName"
+        app:layout_constraintTop_toBottomOf="@+id/MyQueryCropName" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.19" />
+</androidx.constraintlayout.widget.ConstraintLayout>
