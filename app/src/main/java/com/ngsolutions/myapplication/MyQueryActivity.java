@@ -105,7 +105,7 @@ public class MyQueryActivity extends AppCompatActivity {
             String cropCode = replyArr.get(i);
             int temp = cropCode.indexOf('~');
             cropCode = cropCode.substring(1,temp);
-            if(!cropCode.equals("0")) {
+
                 DocumentReference cropnameRef = fstore.collection("plan").document(cropCode);
                 cropnameRef.addSnapshotListener(MyQueryActivity.this, new EventListener<DocumentSnapshot>() {
                             @Override
@@ -119,11 +119,7 @@ public class MyQueryActivity extends AppCompatActivity {
                             }
                         }
                 );
-            }
-            else
-            {
-                cropName.add(getString(R.string.common_forum));
-            }
+
             DocumentReference messageRef = fstore.collection("forums").document(cropCode);
             messageRef.addSnapshotListener(MyQueryActivity.this, new EventListener<DocumentSnapshot>() {
                         @Override
@@ -135,7 +131,11 @@ public class MyQueryActivity extends AppCompatActivity {
                                     int temp = t.indexOf('~');
                                     t = "text" + t.substring(temp+1);
                                     int temp2 = value.get(t).toString().indexOf("||");
-                                    Message.add(value.get(t).toString().substring(temp2+2));
+                                    int temp3 = value.get(t).toString().indexOf("^^");
+                                    if(temp3>0)
+                                        Message.add(value.get(t).toString().substring(temp2+2,temp3));
+                                    else
+                                        Message.add(value.get(t).toString().substring(temp2+2));
                                     if (replyArr.size() == Message.size()) {
                                         for (int j = 0; j < replyArr.size(); j++) {
                                             MyQueryModel myQueryModel = new MyQueryModel(cropName.get(j), Message.get(j),replyArr.get(j));
