@@ -4,3 +4,5 @@ The main target audience of the app is farmers. Keeping this in mind, the app ha
 ![image](https://user-images.githubusercontent.com/54117859/133574157-2761a50b-a2bc-4993-8178-42672046aafc.png)
 
 Research Paper: https://drive.google.com/file/d/1vpXP9e_1rqTiyayxFfZkzRuPEZc8hpbR/view?usp=sharing
+
+Download Link: https://github.com/niranjangirhe/ShetkariMitraApp/releases
