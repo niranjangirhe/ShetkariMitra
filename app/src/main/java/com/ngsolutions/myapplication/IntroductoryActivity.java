@@ -71,7 +71,7 @@ public class IntroductoryActivity extends AppCompatActivity {
                         public void onResponse(JSONArray response) {
                             try{
                                 //Toast.makeText(IntroductoryActivity.this, response.getJSONObject(0).getString("version"), Toast.LENGTH_SHORT).show();
-                                if(response.getJSONObject(0).getString("version").equals("1.33.1"))
+                                if(response.getJSONObject(0).getString("version").equals("2.0.0"))
                                 {
                                     Handler handler = new Handler();
                                     handler.postDelayed(new Runnable() {

@@ -233,8 +233,8 @@ public class WeatherActivity extends AppCompatActivity {
         featuredLocations.add(new FeaturedHelperClass(getResources().getIdentifier(ConditionDays[3],"drawable",getPackageName()),MinMaxDays[3],ConditionDays[3],DateToday(c.get(Calendar.DAY_OF_WEEK))));
         c.add(Calendar.DATE,1);
         featuredLocations.add(new FeaturedHelperClass(getResources().getIdentifier(ConditionDays[4],"drawable",getPackageName()),MinMaxDays[4],ConditionDays[4],DateToday(c.get(Calendar.DAY_OF_WEEK))));
-        c.add(Calendar.DATE,1);
-        featuredLocations.add(new FeaturedHelperClass(getResources().getIdentifier(ConditionDays[5],"drawable",getPackageName()),MinMaxDays[5],ConditionDays[5],DateToday(c.get(Calendar.DAY_OF_WEEK))));
+        //c.add(Calendar.DATE,1);
+        //featuredLocations.add(new FeaturedHelperClass(getResources().getIdentifier(ConditionDays[5],"drawable",getPackageName()),MinMaxDays[5],ConditionDays[5],DateToday(c.get(Calendar.DAY_OF_WEEK))));
 
 
 
