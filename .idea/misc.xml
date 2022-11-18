@@ -8,6 +8,13 @@
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/popupconnect.xml" value="0.176" />
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/popuplang.xml" value="0.2" />
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/popupname.xml" value="0.10840108401084012" />
+        <entry key="app/src/main/res/layout/activity_camera.xml" value="0.21829710144927536" />
+        <entry key="app/src/main/res/layout/activity_chat.xml" value="0.20789473684210527" />
+        <entry key="app/src/main/res/layout/activity_chat_main_screen.xml" value="0.20789473684210527" />
+        <entry key="app/src/main/res/layout/activity_home_page.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_my_crop.xml" value="0.28636403349391804" />
+        <entry key="app/src/main/res/layout/activity_project.xml" value="0.3009150722570588" />
+        <entry key="app/src/main/res/layout/activity_setting_.xml" value="0.12952898550724637" />
       </map>
     </option>
   </component>

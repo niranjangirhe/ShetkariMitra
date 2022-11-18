@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProjectActivity"
-    android:background="@drawable/background_mycrop">
+    android:background="@drawable/background_mycrop"
+    tools:context=".ProjectActivity">
+
     <ImageView
         android:id="@+id/imageView14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:adjustViewBounds="true"
         app:srcCompat="@drawable/upper_long" />
 
     <ImageButton
@@ -45,68 +46,29 @@
 
     <Button
         android:id="@+id/Pcrop1"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
         android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toStartOf="@+id/Pcrop2"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
     <Button
         android:id="@+id/Pcrop2"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/crop_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Pcrop1"
         app:layout_constraintTop_toTopOf="@+id/Pcrop1" />
 
-    <Button
-        android:id="@+id/Pcrop3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/crop_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Pcrop1" />
-
-    <Button
-        android:id="@+id/Pcrop4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/crop_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/Pcrop3"
-        app:layout_constraintTop_toBottomOf="@+id/Pcrop2" />
-
-    <Button
-        android:id="@+id/Pcrop5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/crop_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Pcrop3" />
-
-    <Button
-        android:id="@+id/Pcrop6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="25dp"
-        android:background="@drawable/crop_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/Pcrop5"
-        app:layout_constraintTop_toBottomOf="@+id/Pcrop4" />
 
     <ImageButton
         android:id="@+id/Pclose1"
@@ -120,6 +82,7 @@
         app:layout_constraintStart_toStartOf="@+id/Pcrop1"
         app:layout_constraintTop_toTopOf="@+id/Pcrop1"
         app:layout_constraintVertical_bias="0.093" />
+
     <ImageButton
         android:id="@+id/Pclose2"
         android:layout_width="30dp"
@@ -132,6 +95,67 @@
         app:layout_constraintStart_toStartOf="@+id/Pcrop2"
         app:layout_constraintTop_toTopOf="@+id/Pcrop2"
         app:layout_constraintVertical_bias="0.093" />
+
+    <TextView
+        android:id="@+id/Pcropname1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:maxLength="35"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Pcrop1"
+        app:layout_constraintEnd_toEndOf="@+id/Pcrop1"
+        app:layout_constraintStart_toStartOf="@+id/Pcrop1"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop1"
+        app:layout_constraintVertical_bias="0.914" />
+
+    <TextView
+        android:id="@+id/Pcropname2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:maxLength="35"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Pcrop2"
+        app:layout_constraintEnd_toEndOf="@+id/Pcrop2"
+        app:layout_constraintStart_toStartOf="@+id/Pcrop2"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop2"
+        app:layout_constraintVertical_bias="0.914" />
+
+
+    <Button
+        android:id="@+id/Pcrop4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Pcrop3"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop3" />
+
+    <Button
+        android:id="@+id/Pcrop3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toStartOf="@+id/Pcrop4"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pcrop1" />
+
     <ImageButton
         android:id="@+id/Pclose3"
         android:layout_width="30dp"
@@ -144,6 +168,7 @@
         app:layout_constraintStart_toStartOf="@+id/Pcrop3"
         app:layout_constraintTop_toTopOf="@+id/Pcrop3"
         app:layout_constraintVertical_bias="0.093" />
+
     <ImageButton
         android:id="@+id/Pclose4"
         android:layout_width="30dp"
@@ -156,6 +181,66 @@
         app:layout_constraintStart_toStartOf="@+id/Pcrop4"
         app:layout_constraintTop_toTopOf="@+id/Pcrop4"
         app:layout_constraintVertical_bias="0.093" />
+
+    <TextView
+        android:id="@+id/Pcropname3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:maxLength="35"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Pcrop3"
+        app:layout_constraintEnd_toEndOf="@+id/Pcrop3"
+        app:layout_constraintStart_toStartOf="@+id/Pcrop3"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop3"
+        app:layout_constraintVertical_bias="0.914" />
+
+    <TextView
+        android:id="@+id/Pcropname4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:maxLength="35"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textColor="@color/green"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/Pcrop4"
+        app:layout_constraintEnd_toEndOf="@+id/Pcrop4"
+        app:layout_constraintStart_toStartOf="@+id/Pcrop4"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop4"
+        app:layout_constraintVertical_bias="0.914" />
+
+    <Button
+        android:id="@+id/Pcrop6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Pcrop5"
+        app:layout_constraintTop_toTopOf="@+id/Pcrop5" />
+
+    <Button
+        android:id="@+id/Pcrop5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/crop_button"
+        app:layout_constraintEnd_toStartOf="@+id/Pcrop6"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Pcrop3" />
+
     <ImageButton
         android:id="@+id/Pclose5"
         android:layout_width="30dp"
@@ -168,6 +253,7 @@
         app:layout_constraintStart_toStartOf="@+id/Pcrop5"
         app:layout_constraintTop_toTopOf="@+id/Pcrop5"
         app:layout_constraintVertical_bias="0.093" />
+
     <ImageButton
         android:id="@+id/Pclose6"
         android:layout_width="30dp"
@@ -176,106 +262,46 @@
         android:elevation="2dp"
         app:layout_constraintBottom_toBottomOf="@+id/Pcrop6"
         app:layout_constraintEnd_toEndOf="@+id/Pcrop6"
-        app:layout_constraintHorizontal_bias="0.0946"
+        app:layout_constraintHorizontal_bias="0.094"
         app:layout_constraintStart_toStartOf="@+id/Pcrop6"
         app:layout_constraintTop_toTopOf="@+id/Pcrop6"
         app:layout_constraintVertical_bias="0.093" />
 
     <TextView
-        android:id="@+id/Pcropname1"
-        android:layout_width="180dp"
+        android:id="@+id/Pcropname5"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLength = "35"
         android:fontFamily="sans-serif"
+        android:maxLength="35"
         android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/green"
         android:textSize="16dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/Pcrop1"
-        app:layout_constraintEnd_toEndOf="@+id/Pcrop1"
-        app:layout_constraintStart_toStartOf="@+id/Pcrop1"
-        app:layout_constraintTop_toTopOf="@+id/Pcrop1"
-        app:layout_constraintVertical_bias="0.914" />
-    <TextView
-        android:id="@+id/Pcropname2"
-        android:layout_width="180dp"
-        android:maxLength = "35"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/green"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Pcrop2"
-        app:layout_constraintEnd_toEndOf="@+id/Pcrop2"
-        app:layout_constraintStart_toStartOf="@+id/Pcrop2"
-        app:layout_constraintTop_toTopOf="@+id/Pcrop2"
-        app:layout_constraintVertical_bias="0.914" />
-    <TextView
-        android:id="@+id/Pcropname3"
-        android:layout_width="180dp"
-        android:maxLength = "35"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/green"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Pcrop3"
-        app:layout_constraintEnd_toEndOf="@+id/Pcrop3"
-        app:layout_constraintStart_toStartOf="@+id/Pcrop3"
-        app:layout_constraintTop_toTopOf="@+id/Pcrop3"
-        app:layout_constraintVertical_bias="0.914" />
-    <TextView
-        android:id="@+id/Pcropname4"
-        android:layout_width="180dp"
-        android:maxLength = "35"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/green"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="@+id/Pcrop4"
-        app:layout_constraintEnd_toEndOf="@+id/Pcrop4"
-        app:layout_constraintStart_toStartOf="@+id/Pcrop4"
-        app:layout_constraintTop_toTopOf="@+id/Pcrop4"
-        app:layout_constraintVertical_bias="0.914" />
-    <TextView
-        android:id="@+id/Pcropname5"
-        android:layout_width="180dp"
-        android:maxLength = "35"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:fontFamily="sans-serif"
-        android:textStyle="bold"
-        android:textAlignment="center"
-        android:textColor="@color/green"
-        android:textSize="18dp"
         app:layout_constraintBottom_toBottomOf="@+id/Pcrop5"
         app:layout_constraintEnd_toEndOf="@+id/Pcrop5"
         app:layout_constraintStart_toStartOf="@+id/Pcrop5"
         app:layout_constraintTop_toTopOf="@+id/Pcrop5"
         app:layout_constraintVertical_bias="0.914" />
+
     <TextView
         android:id="@+id/Pcropname6"
-        android:layout_width="180dp"
-        android:maxLength = "35"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:fontFamily="sans-serif"
-        android:textStyle="bold"
+        android:maxLength="35"
+        android:text="TextView"
         android:textAlignment="center"
         android:textColor="@color/green"
-        android:textSize="18dp"
+        android:textSize="16dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Pcrop6"
         app:layout_constraintEnd_toEndOf="@+id/Pcrop6"
         app:layout_constraintStart_toStartOf="@+id/Pcrop6"
         app:layout_constraintTop_toTopOf="@+id/Pcrop6"
         app:layout_constraintVertical_bias="0.914" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

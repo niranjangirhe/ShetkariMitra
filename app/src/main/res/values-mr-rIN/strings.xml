@@ -88,4 +88,5 @@
     <string name="errorfecting">"डेटा लाने में त्रुटि "</string>
     <string name="my_queries">"माझे प्रश्न "</string>
     <string name="capture">Capture</string>
+    <string name="soil_test">Soil Test</string>
 </resources>

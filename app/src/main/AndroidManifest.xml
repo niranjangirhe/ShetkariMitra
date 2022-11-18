@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-
+        <activity
+            android:name=".CameraActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity android:name=".MyQueryActivity" />
         <activity
             android:name=".Model.SplashScreen"

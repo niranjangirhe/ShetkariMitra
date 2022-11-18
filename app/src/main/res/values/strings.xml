@@ -87,5 +87,6 @@
     <string name="errorfecting">Error fetching data</string>
     <string name="my_queries">My Queries</string>
     <string name="capture">Capture</string>
+    <string name="soil_test">Soil Test</string>
 
 </resources>

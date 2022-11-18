@@ -55,7 +55,6 @@ public class Setting_Activity extends AppCompatActivity {
     String userID,userName;
     boolean datafound=false;
     boolean loggedin=true;
-    Button soil_test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +73,6 @@ public class Setting_Activity extends AppCompatActivity {
         pencilButton.setVisibility(View.INVISIBLE);
         changelang = findViewById(R.id.ChangeLangBtn);
         ConstraintLayout cl = findViewById(R.id.SettingPage);
-        soil_test = findViewById(R.id.soil_img_btn);
 
 
         logOutButton = findViewById(R.id.LogOutBtn);
@@ -236,17 +234,7 @@ public class Setting_Activity extends AppCompatActivity {
             }
         });
 
-        soil_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ImagePicker.with(Setting_Activity.this)
-                        .crop()	    			//Crop image(Optional), Check Customization for more option
-                        .compress(1024)			//Final image size will be less than 1 MB(Optional)
-                        .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
-                        .start();
 
-            }
-        });
     }
 
     @Override

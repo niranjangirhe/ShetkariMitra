@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -74,6 +75,8 @@ public class HomePage extends AppCompatActivity {
     FirebaseAuth Auth;
     FirebaseFirestore fstore;
     String userID,userName="";
+    Button soil_test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -124,6 +127,7 @@ public class HomePage extends AppCompatActivity {
             }
         });
 
+        soil_test = findViewById(R.id.soil_img_btn);
 
         kisancall.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,6 +191,14 @@ public class HomePage extends AppCompatActivity {
             }
         });
         greetCity.setText(getString(R.string.Greetings)+userName);
+
+        soil_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomePage.this,CameraActivity.class);
+                startActivity(i);
+            }
+        });
 
     }
 

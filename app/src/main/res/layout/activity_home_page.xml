@@ -36,7 +36,7 @@
         android:id="@+id/ProjectBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/treatment_button"
         app:layout_constraintBottom_toBottomOf="@+id/MyCropsBtn"
@@ -52,7 +52,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/mycrops_button"
         android:elevation="10dp"
@@ -68,7 +68,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/disease_button"
         app:layout_constraintBottom_toTopOf="@+id/kisanCallCEnterBtn"
@@ -81,7 +81,7 @@
         android:id="@+id/GovSchemesBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/govschemes_button"
         app:layout_constraintBottom_toBottomOf="@+id/ChatBtn"
@@ -151,12 +151,12 @@
         android:textColor="@color/white"
         android:textSize="22dp"
         android:textStyle="bold"
-        app:layout_constraintVertical_bias="0.7"
         app:layout_constraintBottom_toTopOf="@+id/textView16"
         app:layout_constraintEnd_toEndOf="@+id/WindSpeedTextView"
         app:layout_constraintHorizontal_bias="0.183"
         app:layout_constraintStart_toStartOf="@+id/WindSpeedTextView"
-        app:layout_constraintTop_toTopOf="@+id/DescriptionTextView" />
+        app:layout_constraintTop_toTopOf="@+id/DescriptionTextView"
+        app:layout_constraintVertical_bias="0.7" />
 
     <TextView
         android:id="@+id/GreetCityTextView"
@@ -349,7 +349,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/soil_img_btn"
         app:layout_constraintTop_toBottomOf="@+id/ChatBtn"
         app:layout_constraintVertical_bias="1" />
 
@@ -357,13 +357,25 @@
         android:id="@+id/progressBar"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:scaleType="centerCrop"
         android:layout_marginStart="24dp"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/weather_animation"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toEndOf="@+id/WindSpeedTextView"
-        app:layout_constraintTop_toTopOf="@+id/WindSpeedTextView" />
+        app:layout_constraintTop_toTopOf="@+id/WindSpeedTextView"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/weather_animation" />
+
+    <Button
+        android:id="@+id/soil_img_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button"
+        android:text="@string/soil_test"
+        app:layout_constraintBottom_toBottomOf="@+id/kisanCallCEnterBtn"
+        app:layout_constraintEnd_toStartOf="@+id/kisanCallCEnterBtn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/kisanCallCEnterBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
