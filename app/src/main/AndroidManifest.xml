@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
-        <activity android:name=".MyQueryActivity"></activity>
+
+        <activity android:name=".MyQueryActivity" />
         <activity
             android:name=".Model.SplashScreen"
             android:screenOrientation="portrait"
@@ -75,7 +76,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".notification.FirebaseService"

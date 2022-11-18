@@ -1,16 +1,21 @@
 package com.ngsolutions.myapplication;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,6 +52,8 @@ public class Setting_Activity extends AppCompatActivity {
     String userID,userName;
     boolean datafound=false;
     boolean loggedin=true;
+    Button soil_test;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,6 +71,7 @@ public class Setting_Activity extends AppCompatActivity {
         pencilButton.setVisibility(View.INVISIBLE);
         changelang = findViewById(R.id.ChangeLangBtn);
         ConstraintLayout cl = findViewById(R.id.SettingPage);
+        soil_test = findViewById(R.id.soil_img_btn);
 
 
         logOutButton = findViewById(R.id.LogOutBtn);
@@ -224,7 +232,15 @@ public class Setting_Activity extends AppCompatActivity {
                 sendToWelcome();
             }
         });
+
+        soil_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
+
     private void sendToWelcome() {
         Intent intent = new Intent(Setting_Activity.this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);

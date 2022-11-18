@@ -87,4 +87,5 @@
     <string name="update_app">"कृपया पुढे जाण्यासाठी अॅप अद्यतनित करा "</string>
     <string name="errorfecting">"डेटा आणण्यात त्रुटी "</string>
     <string name="my_queries">"मेरे प्रश्न "</string>
+    <string name="capture">Capture</string>
 </resources>
