@@ -5,58 +5,45 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.ngsolutions.myapplication.Mics.PostData;
-import com.ngsolutions.myapplication.Mics.RealPathUtil;
+import com.ngsolutions.myapplication.ml.SoilNet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
+import org.tensorflow.lite.DataType;
+import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 
 public class CameraActivity extends AppCompatActivity {
 
     Button capture;
     ImageView image;
-    Button submitBtn;
     String finalEncode;
-    private final static String url = "https://soilnet.herokuapp.com/predict";
+    private final static int imageSize = 224;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
         capture = findViewById(R.id.CaptureBtn);
-        submitBtn = findViewById(R.id.SubmitBtn);
         image = findViewById(R.id.cameraPreview);
 
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ImagePicker.with(CameraActivity.this)
-                        .crop()	    			//Crop image(Optional), Check Customization for more option
+                        .crop(1f,1f)	    			//Crop image(Optional), Check Customization for more option
                         .compress(1024)			//Final image size will be less than 1 MB(Optional)
                         .maxResultSize(1080, 1080)	//Final image resolution will be less than 1080 x 1080(Optional)
                         .start();
@@ -64,64 +51,28 @@ public class CameraActivity extends AppCompatActivity {
             }
         });
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                uploadImg();
-            }
-        });
-
     }
 
-    private void uploadImg() {
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.d("Nira",response);
-                Toast.makeText(CameraActivity.this, "Res"+response, Toast.LENGTH_SHORT).show();
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.d("Nira",error.toString());
-                Toast.makeText(CameraActivity.this, "Res"+error.toString(), Toast.LENGTH_SHORT).show();
-            }
-        }){
-            @Nullable
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> map = new HashMap<String,String>();
-                map.put("image",finalEncode);
-                return map;
-            }
-
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError {
-//                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Content-Type", "multipart/form-data");
-//                return headers;
-//            }
-        };
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        queue.add(request);
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            //Image Uri will not be null for RESULT_OK
-            Uri uri  = data.getData();
-            image.setImageURI(uri);
-            //filePath = RealPathUtil.getRealPath(CameraActivity.this,uri);
+
+            Uri imageUri = data.getData();
             try {
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                encodeBitMapImage(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                Bitmap imageBitmap = (Bitmap) MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                int dimension = imageBitmap.getHeight();
+                imageBitmap = ThumbnailUtils.extractThumbnail(imageBitmap,dimension,dimension);
+
+                imageBitmap = Bitmap.createScaledBitmap(imageBitmap,224,224,false);
+                classifyImage(imageBitmap);
             }
+            catch (Exception e)
+            {
+                Toast.makeText(this, "Error in retry", Toast.LENGTH_SHORT).show();
+            }
+            image.setImageURI(imageUri);
 
 
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
@@ -131,11 +82,54 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    private void encodeBitMapImage(Bitmap bitmap) {
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG,100,byteArrayOutputStream);
-        byte[] bytesOfImage = byteArrayOutputStream.toByteArray();
-        finalEncode = android.util.Base64.encodeToString(bytesOfImage, Base64.DEFAULT);
+    private void classifyImage(Bitmap imageBitmap) {
+        try {
+            SoilNet model = SoilNet.newInstance(getApplicationContext());
+
+            // Creates inputs for reference.
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, imageSize, imageSize, 3}, DataType.FLOAT32);
+            ByteBuffer byteBuffer = ByteBuffer.allocate(4*imageSize*imageSize*3);
+            byteBuffer.order(ByteOrder.nativeOrder());
+            int[] intValues = new int[imageSize * imageSize];
+            imageBitmap.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
+            int pixel = 0;
+            //iterate over each pixel and extract R, G, and B values. Add those values individually to the byte buffer.
+            for(int i = 0; i < imageSize; i ++){
+                for(int j = 0; j < imageSize; j++){
+                    int val = intValues[pixel++]; // RGB
+                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 1));
+                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 1));
+                    byteBuffer.putFloat((val & 0xFF) * (1.f / 1));
+                }
+            }
+            inputFeature0.loadBuffer(byteBuffer);
+
+            // Runs model inference and gets result.
+            SoilNet.Outputs outputs = model.process(inputFeature0);
+            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
+
+            float[] confidences = outputFeature0.getFloatArray();
+            // find the index of the class with the biggest confidence.
+            int maxPos = 0;
+            float maxConfidence = 0;
+            for (int i = 0; i < confidences.length; i++) {
+                Toast.makeText(this, "Type"+i, Toast.LENGTH_SHORT).show();
+                if (confidences[i] > maxConfidence) {
+                    maxConfidence = confidences[i];
+                    maxPos = i;
+                }
+            }
+            String[] soil_type = {"Clay_Soil","Black_Soil","RED_Soil","ALLUVIAL_Soil"};
+            Toast.makeText(this, "Soil Type" + maxPos, Toast.LENGTH_SHORT).show();
+
+
+            // Releases model resources if no longer used.
+            model.close();
+        } catch (IOException e) {
+            // TODO Handle the exception
+        }
+
     }
+
 
 }
