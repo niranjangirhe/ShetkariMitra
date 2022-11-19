@@ -30,7 +30,7 @@ public class CameraActivity extends AppCompatActivity {
     Button capture;
     ImageView image;
     String finalEncode;
-    private final static int imageSize = 224;
+    private final static int imageSize = 244;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +113,7 @@ public class CameraActivity extends AppCompatActivity {
             int maxPos = 0;
             float maxConfidence = 0;
             for (int i = 0; i < confidences.length; i++) {
-                Toast.makeText(this, "Type"+i, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Type"+i+"  "+confidences[i], Toast.LENGTH_SHORT).show();
                 if (confidences[i] > maxConfidence) {
                     maxConfidence = confidences[i];
                     maxPos = i;
