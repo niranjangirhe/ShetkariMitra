@@ -89,4 +89,5 @@
     <string name="my_queries">"मेरे प्रश्न "</string>
     <string name="capture">Capture</string>
     <string name="soil_test">Soil Test</string>
+    <string name="submit">Submit</string>
 </resources>
