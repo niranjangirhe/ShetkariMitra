@@ -18,20 +18,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".TestResultActivity"
+            android:exported="false" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDJiZxgL0S8T5FgJoXsUSoq8vD39ZN0FXw" />
+
         <activity
             android:name=".MapActivity"
-            android:exported="false" >
+            android:exported="false">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyDJiZxgL0S8T5FgJoXsUSoq8vD39ZN0FXw" />
-            <meta-data android:name="com.google.android.gms.version"
+            <meta-data
+                android:name="com.google.android.gms.version"
                 android:value="@integer/google_play_services_version" />
-
         </activity>
-
         <activity
             android:name=".CameraActivity"
             android:exported="false"

@@ -95,4 +95,6 @@
     <string name="cancel">Cancel</string>
     <string name="tap_location">Tap on the map to select Location</string>
     <string name="back">Back</string>
+    <string name="analyze">Analyze</string>
+    <string name="save">Save</string>
 </resources>
