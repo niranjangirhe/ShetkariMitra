@@ -30,6 +30,7 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -76,6 +77,7 @@ public class HomePage extends AppCompatActivity {
     FirebaseFirestore fstore;
     String userID,userName="";
     Button soil_test;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +98,8 @@ public class HomePage extends AppCompatActivity {
         projectButton = findViewById(R.id.ProjectBtn);
         ChatButton = findViewById(R.id.ChatBtn);
         govPolicy = findViewById(R.id.GovSchemesBtn);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
 
         temperature.setVisibility(View.INVISIBLE);
         humidity.setVisibility(View.INVISIBLE);
@@ -195,7 +199,7 @@ public class HomePage extends AppCompatActivity {
         soil_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomePage.this,CameraActivity.class);
+                Intent i = new Intent(HomePage.this,MapActivity.class);
                 startActivity(i);
             }
         });
@@ -218,14 +222,7 @@ public class HomePage extends AppCompatActivity {
         Log.d("niranjanState","in getLo");
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(HomePage.this);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},REQUEST_CODE);
+            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.ACCESS_COARSE_LOCATION},REQUEST_CODE);
             return;
         }
         if (ActivityCompat.checkSelfPermission(HomePage.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {

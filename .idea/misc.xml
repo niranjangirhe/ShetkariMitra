@@ -3,7 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Program/app/src/main/res/layout/activity_camera.xml" value="0.176" />
+        <entry key="..\:/Program/app/src/main/res/layout/activity_home_page.xml" value="0.24547101449275363" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_main.xml" value="0.24547101449275363" />
+        <entry key="..\:/Program/app/src/main/res/layout/activity_map.xml" value="0.2" />
+        <entry key="..\:/Program/app/src/main/res/layout/custom_confirm_address.xml" value="0.11302083333333333" />
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_chat.xml" value="0.10840108401084012" />
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_introductory.xml" value="0.1" />
         <entry key="..\:/Projects/AndroidStudioProjects/MyApplication/app/src/main/res/layout/popupconnect.xml" value="0.176" />

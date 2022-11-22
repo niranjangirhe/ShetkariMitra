@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.ngsolutions.myapplication.ml.SoilNet;
 
@@ -29,8 +30,10 @@ public class CameraActivity extends AppCompatActivity {
 
     Button capture;
     ImageView image;
-    String finalEncode;
+    Button backBtn, nextBtn;
+    LottieAnimationView lottieAnimationView;
     private final static int imageSize = 244;
+    double Lat, Long;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +41,21 @@ public class CameraActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera);
         capture = findViewById(R.id.CaptureBtn);
         image = findViewById(R.id.cameraPreview);
+        lottieAnimationView = findViewById(R.id.soilAnimation);
+        backBtn = findViewById(R.id.soilBack2Btn);
+        nextBtn = findViewById(R.id.soilNext2Btn);
 
+        Lat = getIntent().getExtras().getDouble("Lat");
+        Long = getIntent().getExtras().getDouble("Long");
+
+        Toast.makeText(this, "Location "+Lat+" "+Long, Toast.LENGTH_SHORT).show();
+
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         capture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +90,9 @@ public class CameraActivity extends AppCompatActivity {
                 Toast.makeText(this, "Error in retry", Toast.LENGTH_SHORT).show();
             }
             image.setImageURI(imageUri);
-
+            lottieAnimationView.setVisibility(View.GONE);
+            image.getLayoutParams().height = image.getWidth();
+            image.requestLayout();
 
         } else if (resultCode == ImagePicker.RESULT_ERROR) {
             Toast.makeText(this, ImagePicker.getError(data), Toast.LENGTH_SHORT).show();

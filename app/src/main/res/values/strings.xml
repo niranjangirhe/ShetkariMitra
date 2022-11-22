@@ -89,5 +89,10 @@
     <string name="capture">Capture</string>
     <string name="soil_test">Soil Test</string>
     <string name="submit">Submit</string>
+    <string name="current_location_failed">Current Location not detected</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="tap_location">Tap on the map to select Location</string>
+    <string name="back">Back</string>
 
 </resources>

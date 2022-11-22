@@ -4,20 +4,34 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication"
-        android:requestLegacyExternalStorage="true"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDJiZxgL0S8T5FgJoXsUSoq8vD39ZN0FXw" />
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" >
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyDJiZxgL0S8T5FgJoXsUSoq8vD39ZN0FXw" />
+            <meta-data android:name="com.google.android.gms.version"
+                android:value="@integer/google_play_services_version" />
+
+        </activity>
+
         <activity
             android:name=".CameraActivity"
             android:exported="false"
