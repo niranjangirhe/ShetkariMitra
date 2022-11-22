@@ -82,16 +82,17 @@ public class CameraActivity extends AppCompatActivity {
         }
     }
 
-    private void classifyImage(Bitmap imageBitmap) {
+    public void classifyImage(Bitmap image){
         try {
             SoilNet model = SoilNet.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, imageSize, imageSize, 3}, DataType.FLOAT32);
-            ByteBuffer byteBuffer = ByteBuffer.allocate(4*imageSize*imageSize*3);
+            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 244, 244, 3}, DataType.FLOAT32);
+            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
+
             int[] intValues = new int[imageSize * imageSize];
-            imageBitmap.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
+            image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
             int pixel = 0;
             //iterate over each pixel and extract R, G, and B values. Add those values individually to the byte buffer.
             for(int i = 0; i < imageSize; i ++){
@@ -102,6 +103,7 @@ public class CameraActivity extends AppCompatActivity {
                     byteBuffer.putFloat((val & 0xFF) * (1.f / 1));
                 }
             }
+
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
@@ -113,14 +115,13 @@ public class CameraActivity extends AppCompatActivity {
             int maxPos = 0;
             float maxConfidence = 0;
             for (int i = 0; i < confidences.length; i++) {
-                Toast.makeText(this, "Type"+i+"  "+confidences[i], Toast.LENGTH_SHORT).show();
                 if (confidences[i] > maxConfidence) {
                     maxConfidence = confidences[i];
                     maxPos = i;
                 }
             }
-            String[] soil_type = {"Clay_Soil","Black_Soil","RED_Soil","ALLUVIAL_Soil"};
-            Toast.makeText(this, "Soil Type" + maxPos, Toast.LENGTH_SHORT).show();
+            String[] classes = {"Clay_Soil","Black_Soil","ALLUVIAL_Soil", "Red Soil"};;
+            Toast.makeText(this, "Soitl type : "+classes[maxPos], Toast.LENGTH_SHORT).show();
 
 
             // Releases model resources if no longer used.
@@ -128,7 +129,6 @@ public class CameraActivity extends AppCompatActivity {
         } catch (IOException e) {
             // TODO Handle the exception
         }
-
     }
 
 
