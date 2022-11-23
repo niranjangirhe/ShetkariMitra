@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Shetkari Mitra</string>
+    <string name="app_name">eTaka</string>
     <string name="your_message">Your message</string>
     <string name="app_developer">App Developer</string>
     <string name="chats">Forums</string>
@@ -96,5 +96,17 @@
     <string name="back">Back</string>
     <string name="analyze">Analyze</string>
     <string name="save">Save</string>
+    <string name="report_saved">Report Saved</string>
+    <string name="error_savig_report">Error saving report</string>
+    <string name="soil_type">Soil Type</string>
+    <string name="organic_carbon">Organic Carbon</string>
+    <string name="nitrogen">Nitrogen</string>
+    <string name="phosphorus">Phosphorus</string>
+    <string name="potassium">Potassium</string>
+    <string name="cec">CEC</string>
+    <string name="oc_density">OC Density</string>
+    <string name="ph_level">pH Level</string>
+    <string name="overall_fertility">Overall fertility</string>
+    <string name="suitable_crop">Suitable Crop</string>
 
 </resources>

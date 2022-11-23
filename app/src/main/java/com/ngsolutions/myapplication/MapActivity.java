@@ -45,6 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     double finalLat,finalLong;
     Boolean isFirst = true;
     Button backBtn, nextBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +70,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                 Intent i = new Intent(MapActivity.this,CameraActivity.class);
                 i.putExtra("Lat",finalLat);
                 i.putExtra("Long",finalLong);
+                i.putExtra("Mode",1);
                 startActivity(i);
             }
         });

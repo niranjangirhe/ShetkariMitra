@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">"शेटकारी मित्र "</string>
+    <string name="app_name">"eTaka"</string>
     <string name="your_message">"आपका संदेश "</string>
     <string name="app_developer">"ऐप डेवलपर "</string>
     <string name="chats">"मंच  "</string>
@@ -97,4 +97,16 @@
     <string name="back">Back</string>
     <string name="analyze">Analyze</string>
     <string name="save">Save</string>
+    <string name="report_saved">Report Saved</string>
+    <string name="error_savig_report">Error saving report</string>
+    <string name="soil_type">Soil Type</string>
+    <string name="organic_carbon">Organic Carbon</string>
+    <string name="nitrogen">Nitrogen</string>
+    <string name="phosphorus">Phosphorus</string>
+    <string name="potassium">Potassium</string>
+    <string name="cec">CEC</string>
+    <string name="oc_density">OC Density</string>
+    <string name="ph_level">pH Level</string>
+    <string name="overall_fertility">Overall fertility</string>
+    <string name="suitable_crop">Suitable Crop</string>
 </resources>

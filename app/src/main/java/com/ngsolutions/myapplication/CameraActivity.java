@@ -36,6 +36,7 @@ public class CameraActivity extends AppCompatActivity {
     double Lat, Long;
     Uri imageUri;
     int Type;
+    int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,18 +48,33 @@ public class CameraActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.soilBack2Btn);
         nextBtn = findViewById(R.id.soilNext2Btn);
 
-        Lat = getIntent().getExtras().getDouble("Lat");
-        Long = getIntent().getExtras().getDouble("Long");
+        mode = getIntent().getExtras().getInt("Mode");
+        //Toast.makeText(this, "Mode"+mode, Toast.LENGTH_SHORT).show();
+        if(mode==1) {
+            Lat = getIntent().getExtras().getDouble("Lat");
+            Long = getIntent().getExtras().getDouble("Long");
+        }
 
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(CameraActivity.this, TestResultActivity.class);
-                i.putExtra("imageUri",imageUri);
-                i.putExtra("Lat",Lat);
-                i.putExtra("Long",Long);
-                i.putExtra("Type",Type);
-                startActivity(i);
+                if(mode==1) {
+                    Intent i = new Intent(CameraActivity.this, TestResultActivity.class);
+                    i.putExtra("Lat", Lat);
+                    i.putExtra("Long", Long);
+                    i.putExtra("imageUri",imageUri);
+                    i.putExtra("Type",Type);
+                    i.putExtra("Mode",mode);
+                    startActivity(i);
+                }
+                else{
+                    Intent i = new Intent(CameraActivity.this, EmptyTestResultActivity.class);
+                    i.putExtra("imageUri",imageUri);
+                    i.putExtra("Type",Type);
+                    i.putExtra("Mode",mode);
+                    startActivity(i);
+                }
+
             }
         });
 

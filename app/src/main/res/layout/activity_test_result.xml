@@ -38,7 +38,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="sans-serif-black"
-        android:text="Soil Type"
+        android:text="@string/soil_type"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Organic Carbon "
+        android:text="@string/organic_carbon"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Nitrogen"
+        android:text="@string/nitrogen"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +78,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Phosphorus"
+        android:text="@string/phosphorus"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,11 +91,73 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:fontFamily="sans-serif-black"
-        android:text="Potassium"
+        android:text="@string/potassium"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/phosphorusHeader" />
+
+    <TextView
+        android:id="@+id/CECHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/cec"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/potassiumHeader" />
+
+    <TextView
+        android:id="@+id/OCDHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/oc_density"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/CECHeader" />
+    <TextView
+        android:id="@+id/PHHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/ph_level"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OCDHeader" />
+    <TextView
+        android:id="@+id/fertHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/overall_fertility"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/PHHeader" />
+    <TextView
+        android:id="@+id/suitHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-black"
+        android:text="@string/suitable_crop"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fertHeader" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
@@ -110,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="..."
+        android:text="Nil"
         android:textColor="@color/black40"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -121,7 +183,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="..."
+        android:text="Nil"
         android:textColor="@color/black40"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -132,7 +194,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="..."
+        android:text="Nil"
         android:textColor="@color/black40"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -143,7 +205,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="..."
+        android:text="Nil"
         android:textColor="@color/black40"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -154,11 +216,42 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="..."
+        android:text="Nil"
         android:textColor="@color/black40"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="@+id/guideline2"
         app:layout_constraintTop_toTopOf="@+id/potassiumHeader" />
+    <TextView
+        android:id="@+id/CECAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Nil"
+        android:textColor="@color/black40"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/CECHeader" />
+
+    <TextView
+        android:id="@+id/OCDensityAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Nil"
+        android:textColor="@color/black40"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/OCDHeader" />
+    <TextView
+        android:id="@+id/PHAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Nil"
+        android:textColor="@color/black40"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/PHHeader" />
 
     <Button
         android:id="@+id/saveBtn"
@@ -172,6 +265,28 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <TextView
+        android:id="@+id/fertAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Nil"
+        android:textColor="@color/black40"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/fertHeader" />
+
+    <TextView
+        android:id="@+id/cropAns"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Nil"
+        android:textColor="@color/black40"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@+id/suitHeader" />
+
     <Button
         android:id="@+id/cancelBtn"
         android:layout_width="wrap_content"
@@ -182,4 +297,29 @@
         android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TableLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/cancelBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/suitHeader">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </TableLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
