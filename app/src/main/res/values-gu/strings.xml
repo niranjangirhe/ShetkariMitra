@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">eTaka</string>
+
+    <string name="your_message">Yu Mɛsej</string>
+
+    <string name="app_developer">Di wan we de mek di Ap</string>
+
+    <string name="chats">Fɔm dɛn we dɛn kin gɛt</string>
+
+    <string name="greetings">De grit!</string>
+
+    <string name="welcome">WƐLKƆM!</string>
+
+    <string name="nice_to_see_you">Nays fɔ si yu</string>
+
+    <string name="login">Login fɔ yu</string>
+
+    <string name="by_login_you_agree_with_our">We yu login yu gri wit wi</string>
+
+    <string name="terms_and_conditions">Di Tɛm ɛn Kɔndishɔn dɛn</string>
+
+    <string name="my_crops">Mi Krop dɛn</string>
+
+    <string name="crop_fertilizer_suggestion">Sɔgzhɛshɔn fɔ Krop/Fɛtilayza</string>
+
+    <string name="projects">Projek dɛn we dɛn de du</string>
+
+    <string name="hello_there">Halo Dey!</string>
+
+    <string name="mobile_number">Mobayl Nɔmba</string>
+
+    <string name="send_otp">Send OTP we yu de yuz</string>
+
+    <string name="your_name">Yu Nem</string>
+
+    <string name="edit_name">Ɛdit di Nem</string>
+
+    <string name="log_out">Lɔg Ɔut</string>
+
+    <string name="add_to_my_crop">Add To Mi Krop</string>
+
+    <string name="verify_otp">Verifay OTP</string>
+
+    <string name="resend">Sɛnd bak</string>
+
+    <string name="did_not_received_otp">Nɔ bin gɛt OTP?</string>
+
+    <string name="weather_forecast">Weta fɔ di Wɛda</string>
+
+    <string name="save_name">Sev nem</string>
+
+    <string name="this_name_will_be_seen_by_others">Ɔda pipul dɛn go si dis Nem</string>
+
+    <string name="gov_policies">Gɔvmɛnt Polisi dɛn</string>
+
+    <string name="temperature">Tɛmprɛchɔ</string>
+
+    <string name="wind_speed">Di briz we de blo spid</string>
+
+    <string name="description">Tɔk bɔt</string>
+
+    <string name="humidity">Sok</string>
+
+    <string name="Temp">"Temp: "</string>
+
+    <string name="min_max">"Min / Max : "</string>
+
+    <string name="wind">"Briz: "</string>
+
+    <string name="humidity_">"Sok: "</string>
+
+    <string name="cultivation_guide">" Gayd fɔ Kɔltivɛshɔn"</string>
+
+    <string name="Project_plan">" Projek plan fɔ du di wok"</string>
+
+    <string name="crop_deleted">Krop Dilit Saksesful wan</string>
+
+    <string name="please_wait">Duya wet we wi de tek di wɛda data</string>
+
+    <string name="Please_give">Duya gi GPS Permishɔn</string>
+
+    <string name="weather_unSuccess">Got Weather we nɔ bin ebul fɔ du am</string>
+
+    <string name="crop_added">Krop Add Saksesful wan</string>
+
+    <string name="Limit_reached">Limit we dɛn dɔn rich</string>
+
+    <string name="crop_already">Krop dɔn ɔlrɛdi ad</string>
+
+    <string name="new_forum">Nyu Fɔm we yu dɔn stat</string>
+
+    <string name="Greetings">"De grit "</string>
+
+    <string name="nameSavedToYourProfile">Nem we dɛn dɔn kip na yu prɔfayl</string>
+
+    <string name="bodyforemail">----Tayp Yu Mɛsej afta dis----</string>
+
+    <string name="Messagesent">Mɛsej we dɛn sɛn</string>
+
+    <string name="kisan_call_centre">Kisan call centre</string>
+
+    <string name="common_forum">Kɔmɔn fɔm</string>
+
+    <string name="Forum">" Forum"</string>
+
+    <string name="please_enter_valid_otp">Duya, ɛnta Valid OTP</string>
+
+    <string name="OTP_sent">"OTP na Sent pan "</string>
+
+    <string name="Retry_after">"Tray bak afta dat "</string>
+
+    <string name="Wrong_otp">Rɔng OTP de ɛnta</string>
+
+    <string name="OTP_Resent">OTP Risent</string>
+
+    <string name="invalid_otp">OTP we nɔ rayt</string>
+
+    <string name="enter_mobile">Ɛnta Mobayl nɔmba</string>
+
+    <string name="otp_sent">OTP we dɛn sɛn</string>
+
+    <string name="waiting_for_otp">"wet fɔ ɔto-ditekt OTP, "</string>
+
+    <string name="seconds">" sɛkɔn dɛn"</string>
+
+    <string name="common">Kɔmɔn</string>
+
+    <string name="fertilzer_suggetion">Sɔgzhɛshɔn fɔ Fɛtilayza</string>
+
+    <string name="crop_suggestion">Sɔgzhɛshɔn fɔ Krop</string>
+
+    <string name="add_crop">Add Krop</string>
+
+    <string name="select_state">--Pik di Stet--</string>
+
+    <string name="select_district">--pik di District--</string>
+
+    <string name="select_crop">--pik di Crop--</string>
+
+    <string name="wait_for_moment">Wait fɔ wan Moment</string>
+
+    <string name="crop_select">pik di Crop</string>
+
+    <string name="something_went_wrong">Sɔntin bin rɔng</string>
+
+    <string name="me">Mi</string>
+
+    <string name="query">Kwɛstyɔn</string>
+
+    <string name="your">"yu"</string>
+
+    <string name="no_reply">No ripli nɔ de yet</string>
+
+    <string name="upload_in_progress">Uplod in Progres de go bifo</string>
+
+    <string name="image_upload_failed">Imej Ɔplɔd Fail</string>
+
+    <string name="write_message">Rayt Mɛsej</string>
+
+    <string name="compressing_image">Fɔ Kɔmprɛs Imej</string>
+
+    <string name="no_internet_connection">Nɔ Intanɛt Kɔnɛkshɔn nɔ de</string>
+
+    <string name="querry_answered">Dɛn ansa yu kwɛstyɔn</string>
+
+    <string name="enter_valid_name">Ɛntay Valid Nem</string>
+
+    <string name="message_delete">Dɛn dɔn dilit di mɛsej</string>
+
+    <string name="update_app">Duya Update di ap fɔ go bifo</string>
+
+    <string name="errorfecting">Erɔd we dɛn de tek data</string>
+
+    <string name="my_queries">Mi Kwɛstyɔn dɛn</string>
+
+    <string name="capture">Kech</string>
+
+    <string name="soil_test">Tɛst fɔ di grɔn</string>
+
+    <string name="submit">Rɛdi fɔ de ɔnda</string>
+
+    <string name="current_location_failed">Current Location nɔ detekt</string>
+    <string name="next">Nɛks</string>
+    <string name="cancel">nɔ</string>
+    <string name="tap_location">Tap na di map fɔ pik di say we yu de</string>
+    <string name="back">Bak</string>
+    <string name="analyze">Analayz di tin dɛn we yu nid</string>
+    <string name="save">Sev</string>
+    <string name="report_saved">Ripɔt we dɛn dɔn kip</string>
+    <string name="error_savig_report">Ripɔt we dɛn de sev mistek</string>
+    <string name="soil_type">Tayp fɔ di grɔn</string>
+    <string name="organic_carbon">Ɔrganik Kabɔn</string>
+    <string name="nitrogen">Naytrɔjen</string>
+    <string name="phosphorus">Fɔsfɔrɔs</string>
+    <string name="potassium">Potassium</string>
+    <string name="cec">CEC</string>
+    <string name="oc_density">OC Density</string>
+    <string name="ph_level">pH Level</string>
+    <string name="overall_fertility">Ɔl di pikin dɛn we dɛn kin bɔn</string>
+    <string name="suitable_crop">Krop we Fayn</string>
+    <string name="clay">Kle</string>
+    <string name="sand">sansan</string>
+    <string name="slit">Silt</string>
+    <string name="location">Ples</string>
+</resources>

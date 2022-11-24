@@ -259,16 +259,30 @@ public class Setting_Activity extends AppCompatActivity {
         RadioButton r1=langPopupView.findViewById(R.id.radioButton);
         RadioButton r2=langPopupView.findViewById(R.id.radioButton2);
         RadioButton r3=langPopupView.findViewById(R.id.radioButton3);
+        RadioButton r4=langPopupView.findViewById(R.id.radioButton4);
+        RadioButton r5=langPopupView.findViewById(R.id.radioButton5);
+        RadioButton r6=langPopupView.findViewById(R.id.radioButton6);
         SharedPreferences prefs = getSharedPreferences("Settings", Activity.MODE_PRIVATE);
         String lang = prefs.getString("My_lang","en");
-        if(lang.contains("m"))
+        if(lang.equals("mr"))
         {
             r1.setChecked(true);
-
         }
-        else if(lang.contains("h"))
+        else if(lang.equals("hi"))
         {
             r2.setChecked(true);
+        }
+        else if(lang.equals("gu"))
+        {
+            r4.setChecked(true);
+        }
+        else if(lang.equals("pa"))
+        {
+            r5.setChecked(true);
+        }
+        else if(lang.equals(("ta")))
+        {
+            r6.setChecked(true);
         }
         else
         {
@@ -277,22 +291,67 @@ public class Setting_Activity extends AppCompatActivity {
         r1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //r1.setChecked(false);
                 r2.setChecked(false);
                 r3.setChecked(false);
+                r4.setChecked(false);
+                r5.setChecked(false);
+                r6.setChecked(false);
             }
         });
         r2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                r3.setChecked(false);
                 r1.setChecked(false);
+                //r2.setChecked(false);
+                r3.setChecked(false);
+                r4.setChecked(false);
+                r5.setChecked(false);
+                r6.setChecked(false);
             }
         });
         r3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                r2.setChecked(false);
                 r1.setChecked(false);
+                r2.setChecked(false);
+                // r3.setChecked(false);
+                r4.setChecked(false);
+                r5.setChecked(false);
+                r6.setChecked(false);
+            }
+        });
+        r4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                r1.setChecked(false);
+                r2.setChecked(false);
+                r3.setChecked(false);
+                //r4.setChecked(false);
+                r5.setChecked(false);
+                r6.setChecked(false);
+            }
+        });
+        r5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                r1.setChecked(false);
+                r2.setChecked(false);
+                r3.setChecked(false);
+                r4.setChecked(false);
+                // r5.setChecked(false);
+                r6.setChecked(false);
+            }
+        });
+        r6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                r1.setChecked(false);
+                r2.setChecked(false);
+                r3.setChecked(false);
+                r4.setChecked(false);
+                r5.setChecked(false);
+                // r6.setChecked(false);
             }
         });
         ImageButton savelang= langPopupView.findViewById(R.id.SaveLangBtn);
@@ -313,6 +372,18 @@ public class Setting_Activity extends AppCompatActivity {
                 else if(r3.isChecked()) {
                     setLocale("en");
                     Toast.makeText(Setting_Activity.this, "Language Changed to English", Toast.LENGTH_SHORT).show();
+                }
+                else if(r4.isChecked()) {
+                    setLocale("gu");
+                    Toast.makeText(Setting_Activity.this, "Language Changed to Krio", Toast.LENGTH_SHORT).show();
+                }
+                else if(r5.isChecked()) {
+                    setLocale("pa");
+                    Toast.makeText(Setting_Activity.this, "Iyiero dholuo", Toast.LENGTH_SHORT).show();
+                }
+                else if(r6.isChecked()) {
+                    setLocale("ta");
+                    Toast.makeText(Setting_Activity.this, "Language Changed to Luganda", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }

@@ -32,6 +32,7 @@ public class EmptyTestResultActivity extends AppCompatActivity {
     int Type;
     ScrollView pdf;
     Uri uri;
+    double Lat,Long;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +40,9 @@ public class EmptyTestResultActivity extends AppCompatActivity {
         preview = findViewById(R.id.previewImage1);
         cancel = findViewById(R.id.cancelBtn1);
         save = findViewById(R.id.saveBtn1);
+
+        Lat = getIntent().getExtras().getDouble("Lat");
+        Long = getIntent().getExtras().getDouble("Long");
 
         uri = (Uri) getIntent().getExtras().get("imageUri");
         preview.setImageURI(uri);
@@ -104,19 +108,7 @@ public class EmptyTestResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                finish();
-//                ViewGroup.LayoutParams layoutParams = pdf.getLayoutParams();
-//                layoutParams.width = 2300;
-//
-//
-//                pdf.setLayoutParams(layoutParams);
-//                pdf.setVisibility(View.INVISIBLE);
-//                final Handler handler = new Handler(Looper.getMainLooper());
-//                handler.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        createPdfFromView(pdf,"Test"+System.currentTimeMillis(),2480,4008 ,0);
-//                    }
-//                }, 1000);
+
 
             }
         });
@@ -128,60 +120,16 @@ public class EmptyTestResultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //ViewGroup.LayoutParams
                 //createPdfFromView(pdf,"Test"+System.currentTimeMillis(),2480,4008 ,0);
-                Intent i = new Intent(EmptyTestResultActivity.this, TestResultActivity.class);
+                Intent i = new Intent(EmptyTestResultActivity.this, AnalysisActivity.class);
 
                 i.putExtra("imageUri",uri);
                 i.putExtra("Type",Type);
-                i.putExtra("Mode",0);
+                i.putExtra("Lat",Lat);
+                i.putExtra("Long",Long);
+
                 startActivity(i);
             }
         });
     }
-    private void createPdfFromView(View view, String fileName, int pageWidth, int pageHeight, int pageNumber) {
 
-        File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        File file = new File(path, fileName.concat(".pdf"));
-
-        FileOutputStream fOut = null;
-        try {
-            fOut = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if (file.exists()) {
-            PdfDocument document = new PdfDocument();
-            PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(pageWidth, pageHeight, pageNumber).create();
-            PdfDocument.Page page = document.startPage(pageInfo);
-
-            view.draw(page.getCanvas());
-
-            document.finishPage(page);
-
-            try {
-                Toast.makeText(this, "Saving...", Toast.LENGTH_SHORT).show();
-                document.writeTo(fOut);
-            } catch (IOException e) {
-                Toast.makeText(this, "Failed...", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
-
-            document.close();
-
-            /*Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);*/
-
-        } else {
-            //..
-        }
-
-    }
 }

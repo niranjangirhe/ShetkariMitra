@@ -163,9 +163,9 @@ public class HomePage extends AppCompatActivity {
 //                Intent intent = new Intent(HomePage.this, MyCropActivity.class);
 //                startActivity(intent);
 
-                Intent i = new Intent(HomePage.this,CameraActivity.class);
-                i.putExtra("Mode",0);
-                startActivity(i);
+//                Intent i = new Intent(HomePage.this,CameraActivity.class);
+//                i.putExtra("Mode",0);
+//                startActivity(i);
             }
         });
         projectButton.setOnClickListener(new View.OnClickListener() {

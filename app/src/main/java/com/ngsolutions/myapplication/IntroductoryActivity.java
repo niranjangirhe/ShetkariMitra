@@ -95,6 +95,7 @@ public class IntroductoryActivity extends AppCompatActivity {
                                             finish();
                                         }
                                     }, 3000);
+//                                    updateDialog();
                                 }
 
                             } catch (JSONException e) {
@@ -182,4 +183,5 @@ public class IntroductoryActivity extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">eTaka</string>
     <string name="your_message">Your message</string>
@@ -86,7 +87,7 @@
     <string name="update_app">Please Update the app to proceed</string>
     <string name="errorfecting">Error fetching data</string>
     <string name="my_queries">My Queries</string>
-    <string name="capture">Capture</string>
+    <string name="capture">Image Capture</string>
     <string name="soil_test">Soil Test</string>
     <string name="submit">Submit</string>
     <string name="current_location_failed">Current Location not detected</string>
@@ -108,5 +109,9 @@
     <string name="ph_level">pH Level</string>
     <string name="overall_fertility">Overall fertility</string>
     <string name="suitable_crop">Suitable Crop</string>
+    <string name="clay">Clay</string>
+    <string name="sand">Sand</string>
+    <string name="slit">Silt</string>
+    <string name="location">Location</string>
 
 </resources>
