@@ -32,7 +32,7 @@ public class EmptyTestResultActivity extends AppCompatActivity {
     int Type;
     ScrollView pdf;
     Uri uri;
-    double Lat,Long;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,8 +41,8 @@ public class EmptyTestResultActivity extends AppCompatActivity {
         cancel = findViewById(R.id.cancelBtn1);
         save = findViewById(R.id.saveBtn1);
 
-        Lat = getIntent().getExtras().getDouble("Lat");
-        Long = getIntent().getExtras().getDouble("Long");
+//        Lat = getIntent().getExtras().getDouble("Lat");
+//        Long = getIntent().getExtras().getDouble("Long");
 
         uri = (Uri) getIntent().getExtras().get("imageUri");
         preview.setImageURI(uri);
@@ -70,6 +70,16 @@ public class EmptyTestResultActivity extends AppCompatActivity {
 
         //Data Saving
         SoilFacts[] soilFacts = {
+               new SoilFacts("Alluvial Soil","Suggested Crops","pH Levels","Chemical Properties","Moisture Content","Fertility","They yield splendid crops of rice, wheat, sugarcane, tobacco, cotton, jute, maize, oilseeds, vegetables and fruits.","The pH is 7.5 to 8.0.","The proportion of nitrogen is generally low. Potash, phosphoric acid and alkalies are adequate. Iron oxide and lime vary within a wide range. And also Poor in phosphorous.","Natural moisture content of Alluvial Soil 17.98 to 19.65%.", "It is extremely fertile because it is formed by the sediments transported by rivers and is a mixture of sand, clay and silt.\n" +
+                        "It has a loamy texture and it is rich in humus.\n" +
+                        "It has good water retention and water absorbing capacity."),
+                new SoilFacts("Black Soil","Suggested Crops","pH Levels","Chemical","Moisture","Problems and Deficiencies","cotton, wheat, jowar, linseed, virginia tobacco, castor, sunflower and millets.\n\nRice and sugarcane where irrigation facilities are available.","pH of Black Soil ranges between 7.2 - 8.5.","10 per cent of alumina,\n" +
+                        "9-10 per cent of iron oxide,\n" +
+                        "6-8 per cent of lime and magnesium carbonates,\n" +
+                        "Potash is variable (less than 0.5 per cent) and Phosphates, nitrogen and humus are low.\n" +
+                        "Reach in Iron, Magnesium,  Aluminum and potash and calcium\n" +
+                        "soils are with more cation exchange capacity (40-60 m.e./100 g).","Water retention of about 150 - 250 mm/m.","Suffers from moisture stress during drought. Poor in Nitrogen, Potassium, Phosphorus and Humus. Poor drainage and water logging during rainfall. Optimum conditions for tillage occur immediately after harvesting when the surface soil is still moist."),
+
                 new SoilFacts("Clay Soil","Suggested Crops","Moiture and Temperature","pH Level","Improvements and Fertilizers","Other Information","Rice, Lettuce, Chard, Broccoli, Cabbage, Snap Beans, Apple trees, Hydrangeas, Lavender, Peonys, Roses, Sunflowers, Turfgrass","45 to 55% for clay soils. clay has high water retention and poor drainage.\nTemperature: 27.7℃ to 28.9℃" ,"Clay soil is alkaline with pH level between 8-10.","To improve your soil, you'll need to add 6 to 8 inches of organic matter to the entire bed.\n" +
                         "You can add any type of organic matter.\n" +
                         "Clay soils are best improved with the addition of compost and other organic materials only.\n\n" +
@@ -77,15 +87,6 @@ public class EmptyTestResultActivity extends AppCompatActivity {
                         "We recommend using natural fertilizers like manure, compost, or peat moss \n" +
                         "instead of a granulated or liquid fertilizer, which will not effect the soil texture. These organic materials will loosen up the soil and add vital nutrients to help plants thrive.","Rich in organic matter. It is also not good for many plants.\n" +
                         "It is only good for crops like paddy, which require a lot of water. It is used for making toys, pots, and many other purposes. Clay, because of its density, retains moisture well. It also tends to be more nutrient-rich than other soil types."),
-                new SoilFacts("Black Soil","Suggested Crops","pH Levels","Chemical","Moisture","Problems and Deficiencies","cotton, wheat, jowar, linseed, virginia tobacco, castor, sunflower and millets.\n\nRice and sugarcane where irrigation facilities are available.","pH of Black Soil ranges between 7.2 - 8.5.","10 per cent of alumina,\n" +
-                        "9-10 per cent of iron oxide,\n" +
-                        "6-8 per cent of lime and magnesium carbonates,\n" +
-                        "Potash is variable (less than 0.5 per cent) and Phosphates, nitrogen and humus are low.\n" +
-                        "Reach in Iron, Magnesium,  Aluminum and potash and calcium\n" +
-                        "soils are with more cation exchange capacity (40-60 m.e./100 g).","Water retention of about 150 - 250 mm/m.","Suffers from moisture stress during drought. Poor in Nitrogen, Potassium, Phosphorus and Humus. Poor drainage and water logging during rainfall. Optimum conditions for tillage occur immediately after harvesting when the surface soil is still moist."),
-                new SoilFacts("Alluvial Soil","Suggested Crops","pH Levels","Chemical Properties","Moisture Content","Fertility","They yield splendid crops of rice, wheat, sugarcane, tobacco, cotton, jute, maize, oilseeds, vegetables and fruits.","The pH is 7.5 to 8.0.","The proportion of nitrogen is generally low. Potash, phosphoric acid and alkalies are adequate. Iron oxide and lime vary within a wide range. And also Poor in phosphorous.","Natural moisture content of Alluvial Soil 17.98 to 19.65%.", "It is extremely fertile because it is formed by the sediments transported by rivers and is a mixture of sand, clay and silt.\n" +
-                        "It has a loamy texture and it is rich in humus.\n" +
-                        "It has good water retention and water absorbing capacity."),
                 new SoilFacts("Red Soil","Suggested Crops","Deficiency","Temperature","pH Level","Improvements","Cotton, Wheat, Pulses, Millets, OilSeeds, Potatoes, Rice,  Sugarcane , Bananas", "Lime, phosphate, manganese, nitrogen, humus and potash, phosphoric acid, magnesium","Generally develops in warm, temperate, and humid climate. So, the temperature is high here.","Natural pH of Red Soil\nAcidic - 3.5 - 6.5\n\nIn higher rainfall areas:\nAcidic to Neutral - 5 to 7.\n\nWhile in drier areas:\nSlightly Acidic to Neutral - 6.5 to 7.\n\nThey are acidic mainly due to the nature of the parent rocks. The alkali content is fair. They are fairly rich in potassium","1. Crop rotation\n2. Apply organic manure\n3. Use Nutrient Application Technique")};
 
 
@@ -120,12 +121,12 @@ public class EmptyTestResultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //ViewGroup.LayoutParams
                 //createPdfFromView(pdf,"Test"+System.currentTimeMillis(),2480,4008 ,0);
-                Intent i = new Intent(EmptyTestResultActivity.this, AnalysisActivity.class);
+                Intent i = new Intent(EmptyTestResultActivity.this, MapActivity.class);
 
                 i.putExtra("imageUri",uri);
                 i.putExtra("Type",Type);
-                i.putExtra("Lat",Lat);
-                i.putExtra("Long",Long);
+//                i.putExtra("Lat",Lat);
+//                i.putExtra("Long",Long);
 
                 startActivity(i);
             }

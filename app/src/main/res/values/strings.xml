@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">eTaka</string>
     <string name="your_message">Your message</string>
-    <string name="app_developer">App Developer</string>
+    <string name="app_developer">Feedback</string>
     <string name="chats">Forums</string>
     <string name="greetings">Greetings!</string>
     <string name="welcome">WELCOME!</string>

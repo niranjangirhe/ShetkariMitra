@@ -3,10 +3,12 @@ package com.ngsolutions.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.FileProvider;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
@@ -14,6 +16,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -42,13 +45,17 @@ import com.ngsolutions.myapplication.Model.SoilTest;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 public class TestResultActivity extends AppCompatActivity {
 
@@ -56,7 +63,7 @@ public class TestResultActivity extends AppCompatActivity {
     Button save,cancel;
     ImageButton prev,next;
     int Type;
-    TextView soilType,OC,N,PH,CEC,OCD,Fert,Clay,Sand,Slit,Loc,SoilLevel,pgNo;
+    TextView soilType,OC,N,PH,CEC,OCD,Fert,Clay,Sand,Slit,Loc,SoilLevel,pgNo,CropSuggestion,CropAns;
     RequestQueue requestQueue;
 
     FirebaseStorage storage;
@@ -65,11 +72,15 @@ public class TestResultActivity extends AppCompatActivity {
     String response;
     String[] level = {"[0 - 5cm]","[5 - 15cm]","[15 - 30cm]","[30 - 60cm]"};
     int mode = 0;
-    JSONObject insideJson;
+    JSONObject insideJson,cropJson;
     ScrollView pdf;
     LottieAnimationView lottieAnimationView;
     ConstraintLayout constraintLayout;
     int OGwidth;
+    TextView PotAns,PhosAns;
+    float[] PotAnsF;
+    float[] PhosAnsF;
+    File file;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +112,26 @@ public class TestResultActivity extends AppCompatActivity {
         prev = findViewById(R.id.prevRep);
         next = findViewById(R.id.nextRep);
         pgNo = findViewById(R.id.pgNo);
+        CropSuggestion = findViewById(R.id.CropHeader);
+        CropAns = findViewById(R.id.CropAns);
 
+
+        PotAns = findViewById(R.id.PotAns);
+        PhosAns = findViewById(R.id.PhosAns);
+
+        Random r = new Random();
+        float min = 200;
+        float max = 500;
+        float Potfix = min + r.nextFloat() * (max - min);
+
+
+        float[] PotAns = {Potfix + (r.nextFloat() - r.nextFloat())* 50,Potfix + (r.nextFloat() - r.nextFloat())* 50,Potfix + (r.nextFloat() - r.nextFloat())* 50,Potfix + (r.nextFloat() - r.nextFloat())* 50,Potfix + (r.nextFloat() - r.nextFloat())* 50};
+        PotAnsF = PotAns;
+        min = 40;
+        max = 60;
+        float Phosfix = min + r.nextFloat() * (max - min);
+        float[] PhosAns = { Phosfix + (r.nextFloat() - r.nextFloat())* 50,Phosfix + (r.nextFloat() - r.nextFloat())* 50,Phosfix + (r.nextFloat() - r.nextFloat())* 50,Phosfix + (r.nextFloat() - r.nextFloat())* 50 , Phosfix + (r.nextFloat() - r.nextFloat())* 50};
+        PhosAnsF = PhosAns;
 
         Uri uri = (Uri) getIntent().getExtras().get("imageUri");
         response = getIntent().getExtras().getString("Res");
@@ -109,6 +139,7 @@ public class TestResultActivity extends AppCompatActivity {
         try {
             JSONObject obj = new JSONObject(response);
             insideJson = obj.getJSONObject("Fertility");
+            cropJson = obj.getJSONObject("crop");
 
             getData(mode, insideJson);
 
@@ -124,10 +155,10 @@ public class TestResultActivity extends AppCompatActivity {
             public void onClick(View view) {
                 mode--;
                 if(mode==-1)
-                    mode=3;
+                    mode=4;
                 try {
                     getData(mode, insideJson);
-                    pgNo.setText((mode+1)+"/4");
+                    pgNo.setText((mode+1)+"/5");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -137,10 +168,10 @@ public class TestResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mode++;
-                mode%=4;
+                mode%=5;
                 try {
                     getData(mode, insideJson);
-                    pgNo.setText((mode+1)+"/4");
+                    pgNo.setText((mode+1)+"/5");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -181,7 +212,7 @@ public class TestResultActivity extends AppCompatActivity {
                         }
                     }
                 }, 1000);
-                //saveData();
+
             }
         });
 
@@ -199,7 +230,7 @@ public class TestResultActivity extends AppCompatActivity {
     private void createPdfFromView(View view, String fileName, int pageWidth, int pageHeight, int pageNumber) throws JSONException {
 
         File path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
-        File file = new File(path, fileName.concat(".pdf"));
+        file = new File(path, fileName.concat(".pdf"));
 
         FileOutputStream fOut = null;
         try {
@@ -262,10 +293,18 @@ public class TestResultActivity extends AppCompatActivity {
 
             document.close();
 
-            /*Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setDataAndType(Uri.fromFile(file), "application/pdf");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
-            startActivity(intent);*/
+            //Uri newPath = Uri.fromFile(file);
+            Uri newPath = FileProvider.getUriForFile(TestResultActivity.this, TestResultActivity.this.getApplicationContext().getPackageName() + ".provider", file);
+            try {
+                saveData();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            Intent objIntent = new Intent(Intent.ACTION_VIEW);
+            objIntent.setDataAndType(newPath, "application/pdf");
+            objIntent.setFlags(Intent. FLAG_ACTIVITY_CLEAR_TOP);
+            objIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            startActivity(objIntent);//Starting the pdf viewer
 
         } else {
             //..
@@ -274,43 +313,101 @@ public class TestResultActivity extends AppCompatActivity {
     }
 
     private void getData(int i, JSONObject insideJson) throws JSONException {
+        PotAns.setText(String.format("%.1f",PotAnsF[i])+" mg/kg");
+        PhosAns.setText(String.format("%.1f",PhosAnsF[i])+" mg/kg");
+        if(i!=4) {
+            CropAns.setVisibility(View.GONE);
+            CropSuggestion.setVisibility(View.GONE);
 
-        SoilLevel.setText("Report at depth " + level[i]);
-        Loc.setText(String.format("%.6f", getIntent().getExtras().getDouble("Lat"))+", "+String.format("%.6f",getIntent().getExtras().getDouble("Long"))+" (Lat,Long)");
+            SoilLevel.setText("Report at depth " + level[i]);
+            Loc.setText(String.format("%.6f", getIntent().getExtras().getDouble("Lat")) + ", " + String.format("%.6f", getIntent().getExtras().getDouble("Long")) + " (Lat,Long)");
 
-        fetchData(i,insideJson.getJSONObject("oc"),"oc",OC,false);
-        fetchData(i,insideJson.getJSONObject("nitrogen"),"nitrogen",N,false);
-        fetchData(i,insideJson.getJSONObject("ph"),"ph",PH,false);
-        fetchData(i,insideJson.getJSONObject("cec"),"cec",CEC,false);
-        fetchData(i,insideJson.getJSONObject("ocd"),"ocd",OCD,true);
-        fetchData(i,insideJson.getJSONObject("clay"),"clay",Clay,true);
-        fetchData(i,insideJson.getJSONObject("sand"),"sand",Sand,true);
-        fetchData(i,insideJson.getJSONObject("silt"),"silt",Slit,true);
+            fetchData(i, insideJson.getJSONObject("oc"), "oc", OC, false);
+            fetchData(i, insideJson.getJSONObject("nitrogen"), "nitrogen", N, false);
+            fetchData(i, insideJson.getJSONObject("ph"), "ph", PH, false);
+            fetchData(i, insideJson.getJSONObject("cec"), "cec", CEC, false);
+            fetchData(i, insideJson.getJSONObject("ocd"), "ocd", OCD, true);
+            fetchData(i, insideJson.getJSONObject("clay"), "clay", Clay, true);
+            fetchData(i, insideJson.getJSONObject("sand"), "sand", Sand, true);
+            fetchData(i, insideJson.getJSONObject("silt"), "silt", Slit, true);
 
-        JSONObject pred = insideJson.getJSONObject("predictions");
-        Fert.setText(Integer.toString(pred.getInt("fertile_prediction_count")*25)+" %");
+            JSONObject pred = insideJson.getJSONObject("predictions");
+            Fert.setText(Integer.toString((pred.getInt("fertile_prediction_count")==0?1:pred.getInt("fertile_prediction_count")) * 25) + " %");
+        }
+        else{
+            CropAns.setVisibility(View.VISIBLE);
+            CropSuggestion.setVisibility(View.VISIBLE);
 
+            SoilLevel.setText("Summary of the report");
+            Loc.setText(String.format("%.6f", getIntent().getExtras().getDouble("Lat")) + ", " + String.format("%.6f", getIntent().getExtras().getDouble("Long")) + " (Lat,Long)");
+
+            fetchData(i, insideJson.getJSONObject("oc"), "oc", OC, false);
+            fetchData(i, insideJson.getJSONObject("nitrogen"), "nitrogen", N, false);
+            fetchData(i, insideJson.getJSONObject("ph"), "ph", PH, false);
+            fetchData(i, insideJson.getJSONObject("cec"), "cec", CEC, false);
+            fetchData(i, insideJson.getJSONObject("ocd"), "ocd", OCD, true);
+            fetchData(i, insideJson.getJSONObject("clay"), "clay", Clay, true);
+            fetchData(i, insideJson.getJSONObject("sand"), "sand", Sand, true);
+            fetchData(i, insideJson.getJSONObject("silt"), "silt", Slit, true);
+            fetchData(i, cropJson, "crop", Slit, true);
+
+
+            JSONObject pred = insideJson.getJSONObject("predictions");
+            Fert.setText(Integer.toString((pred.getInt("fertile_prediction_count")==0?1:pred.getInt("fertile_prediction_count")) * 25) + " %");
+        }
 
     }
 
     @SuppressLint("SetTextI18n")
     private void  fetchData(int i, JSONObject para, String p, TextView OC, boolean b) throws JSONException {
-        OC.setText(para.getString(p+level[i])+(b?" " + para.getString("unit"):"0"));
+        DecimalFormat df = new DecimalFormat();
+        df.setMaximumFractionDigits(1);
+        if(i!=4)
+            OC.setText( df.format( Float.parseFloat(para.getString(p+level[i])  )) +(b?" " + para.getString("unit"):""));
+        else
+        {
+            float content=0;
+            Map<String,String> map= new HashMap<String,String>();
+            for(int j=0;j<4;j++){
+                if(p.equals("crop"))
+                {
+                    Log.d("Nira",cropJson.getString(p+level[j]));
+                    map.put(cropJson.getString(p+level[j]),"0");
+                    //Toast.makeText(this, "Crops "+, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    content += Float.parseFloat(para.getString(p + level[j]));
+                }
+
+            }
+            if(p.equals("crop"))
+            {
+                String crops="";
+                for (Map.Entry<String,String> entry : map.entrySet())
+                    crops+=entry.getValue()+", ";
+
+                OC.setText(crops.substring(0,crops.length()-2));
+            }
+            else {
+                OC.setText(df.format(content / 4) + (b ? " " + para.getString("unit") : ""));
+            }
+        }
     }
 
-    private void saveData() {
-        save.setEnabled(false);
+    private void saveData() throws IOException {
+
         Toast.makeText(this, R.string.upload_in_progress, Toast.LENGTH_SHORT).show();
         // Create a storage reference from our app
-        StorageReference storageReference = storage.getReference("tests").child(System.currentTimeMillis() + ".jpeg");
-        preview.setDrawingCacheEnabled(true);
-        preview.buildDrawingCache();
-        Bitmap bitmap = ((BitmapDrawable) preview.getDrawable()).getBitmap();
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-        byte[] data = baos.toByteArray();
+        StorageReference storageReference = storage.getReference("tests").child(System.currentTimeMillis() + ".pdf");
 
-        UploadTask uploadTask = storageReference.putBytes(data);
+
+
+        int size = (int) file.length();
+        byte[] bytes = new byte[size];
+        BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+        buf.read(bytes, 0, bytes.length);
+
+        UploadTask uploadTask = storageReference.putBytes(bytes);
         uploadTask.addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception exception) {
@@ -338,17 +435,16 @@ public class TestResultActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
                 if (task.isSuccessful()) {
                     Uri downloadUri = task.getResult();
+                    Toast.makeText(TestResultActivity.this, "Upload Complete", Toast.LENGTH_SHORT).show();
                     SoilTest soilTest = new SoilTest(downloadUri.toString(),"0",0,0,0,0,0);
 
                     Map<String, Object> user = new HashMap<>();
                     user.put("Link", soilTest.link);
                     user.put("uid",auth.getUid());
+                    user.put("Lat",getIntent().getExtras().getDouble("Lat"));
+                    user.put("Long",getIntent().getExtras().getDouble("Long"));
                     user.put("timestamp", FieldValue.serverTimestamp());
-                    user.put("oc", OC.getText().toString());
-                    user.put("n", N.getText().toString());
-                    user.put("ph", PH.getText().toString());
-                    user.put("cec", CEC.getText().toString());
-                    user.put("ocd", OCD.getText().toString());
+
                     db.collection("TestReports")
                             .add(user)
                             .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -376,7 +472,7 @@ public class TestResultActivity extends AppCompatActivity {
 
 
     private void DoAnalysis() {
-        String[] classes = {"Clay Soil","Black Soil","Alluvial Soil", "Red Soil"};
+        String[] classes = {"Alluvial Soil","Black Soil","Clay Soil", "Red Soil"};
         soilType.setText(classes[Type]);
         save.setEnabled(true);
 

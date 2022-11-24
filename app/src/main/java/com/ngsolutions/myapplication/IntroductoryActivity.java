@@ -1,6 +1,5 @@
 package com.ngsolutions.myapplication;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,11 +11,11 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -26,21 +25,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
 
 public class IntroductoryActivity extends AppCompatActivity {
 
@@ -88,20 +80,15 @@ public class IntroductoryActivity extends AppCompatActivity {
                                 else
                                 {
                                     Toast.makeText(IntroductoryActivity.this, R.string.update_app, Toast.LENGTH_SHORT).show();
-                                    Handler handler = new Handler();
-                                    handler.postDelayed(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            finish();
-                                        }
-                                    }, 3000);
-//                                    updateDialog();
+                                    update();
                                 }
 
                             } catch (JSONException e) {
 
                             }
                         }
+
+
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
@@ -176,6 +163,14 @@ public class IntroductoryActivity extends AppCompatActivity {
         dialogBuilder.setView(namePopupView);
         dialog =dialogBuilder.create();
         dialog.show();
+        Button Quit = dialog.findViewById(R.id.buttonDialog);
+        Quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -183,5 +178,31 @@ public class IntroductoryActivity extends AppCompatActivity {
             }
         });
     }
+    public void update()
+    {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View namePopupView = getLayoutInflater().inflate(R.layout.popupconnect,null);
+        dialogBuilder.setView(namePopupView);
+        dialog =dialogBuilder.create();
+        dialog.show();
+        Button Quit = dialog.findViewById(R.id.buttonDialog);
+        LottieAnimationView lottieAnimationView = dialog.findViewById(R.id.lottie1);
+        lottieAnimationView.setAnimation(R.raw.update);
+        Quit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent viewIntent =
+                        new Intent("android.intent.action.VIEW",
+                                Uri.parse("https://github.com/niranjangirhe/ShetkariMitraApp/releases"));
+                startActivity(viewIntent);
+            }
+        });
 
+        dialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                finish();
+            }
+        });
+    }
 }

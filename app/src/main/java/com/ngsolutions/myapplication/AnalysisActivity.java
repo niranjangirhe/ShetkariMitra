@@ -43,10 +43,9 @@ public class AnalysisActivity extends AppCompatActivity {
         //Toast.makeText(this, "Loc "+Lat+", "+Long, Toast.LENGTH_SHORT).show();
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        //String URL = "https://soil-health.herokuapp.com/post?Lat=" + Double.toString(Lat) + "&Long=" + Double.toString(Long) + "&date=2022-07-01&end_dt=2022-07-30";
-        String URL = "https://soil-health.herokuapp.com/post?Lat=19.704656&Long=74.248489&date=2022-07-01&end_dt=2022-07-30";
+        String URL = "https://soil-health.herokuapp.com/post?Lat=" + Double.toString(Lat) + "&Long=" + Double.toString(Long) + "&date=2022-07-01&end_dt=2022-07-30";
+        //String URL = "https://soil-health.herokuapp.com/post?Lat=19.704656&Long=74.248489&date=2022-07-01&end_dt=2022-07-30";
         JSONObject jsonBody = new JSONObject();
-
         final String mRequestBody = jsonBody.toString();
 
         StringRequest stringRequest = new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {

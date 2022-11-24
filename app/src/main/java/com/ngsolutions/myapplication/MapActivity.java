@@ -11,10 +11,12 @@ import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -36,10 +38,8 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-
-
-
-
+    int Type;
+    Uri uri;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private float ZOOM = 13f;
     double finalLat,finalLong;
@@ -57,6 +57,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         backBtn = findViewById(R.id.soilBack1Btn);
         nextBtn = findViewById(R.id.soilNext1Btn);
 
+        uri = (Uri) getIntent().getExtras().get("imageUri");
+        Type = getIntent().getExtras().getInt("Type");
+
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,9 +70,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MapActivity.this,CameraActivity.class);
+                Intent i = new Intent(MapActivity.this,AnalysisActivity.class);
                 i.putExtra("Lat",finalLat);
                 i.putExtra("Long",finalLong);
+                i.putExtra("imageUri",uri);
+                i.putExtra("Type",Type);
                 startActivity(i);
             }
         });

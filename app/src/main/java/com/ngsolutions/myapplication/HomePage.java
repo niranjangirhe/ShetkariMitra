@@ -144,24 +144,25 @@ public class HomePage extends AppCompatActivity {
         govPolicy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent openWebview = new Intent(HomePage.this, WebViewActivity.class);
-//                openWebview.putExtra("pageTitle",getString(R.string.gov_policies));
-//                openWebview.putExtra("url","https://krishijagran.com/agripedia/best-government-schemes-and-programmes-in-agriculture-for-farmers/");
-//                startActivity(openWebview);
+                Intent openWebview = new Intent(HomePage.this, WebViewActivity.class);
+                openWebview.putExtra("pageTitle",getString(R.string.gov_policies));
+                //openWebview.putExtra("url","https://krishijagran.com/agripedia/best-government-schemes-and-programmes-in-agriculture-for-farmers/");
+                openWebview.putExtra("url","https://agricoop.nic.in/en/ministry-major-schemes");
+                startActivity(openWebview);
             }
         });
         ChatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(HomePage.this, ChatMainScreenActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(HomePage.this, ChatMainScreenActivity.class);
+                startActivity(intent);
             }
         });
         myCropButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(HomePage.this, MyCropActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(HomePage.this, MyCropActivity.class);
+                startActivity(intent);
 
 //                Intent i = new Intent(HomePage.this,CameraActivity.class);
 //                i.putExtra("Mode",0);
@@ -171,8 +172,8 @@ public class HomePage extends AppCompatActivity {
         projectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(HomePage.this, ProjectActivity.class);
-//                startActivity(intent);
+                Intent intent = new Intent(HomePage.this, CameraActivity.class);
+                startActivity(intent);
             }
         });
         settingButton.setOnClickListener(new View.OnClickListener() {
@@ -203,7 +204,7 @@ public class HomePage extends AppCompatActivity {
         soil_test.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(HomePage.this,MapActivity.class);
+                Intent i = new Intent(HomePage.this,ProjectActivity.class);
                 startActivity(i);
             }
         });

@@ -348,6 +348,58 @@
                 app:layout_constraintStart_toStartOf="@+id/testCard4" />
 
             <TextView
+                android:id="@+id/PotHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Potassium"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/testCard3"
+                app:layout_constraintTop_toBottomOf="@+id/testCard3" />
+
+            <TextView
+                android:id="@+id/PotAns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="potassium"
+                android:textColor="@color/black40"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PotHeader"
+                app:layout_constraintTop_toBottomOf="@+id/PotHeader"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
+                android:id="@+id/PhosHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Phosphorus"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/testCard3"
+                app:layout_constraintTop_toBottomOf="@+id/PotAns" />
+
+            <TextView
+                android:id="@+id/PhosAns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/location"
+                android:textColor="@color/black40"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/PhosHeader"
+                app:layout_constraintTop_toBottomOf="@+id/PhosHeader"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <TextView
                 android:id="@+id/locHeader"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -357,7 +409,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/testCard3"
-                app:layout_constraintTop_toBottomOf="@+id/testCard3" />
+                app:layout_constraintTop_toBottomOf="@+id/PhosAns" />
 
             <TextView
                 android:id="@+id/LocAns"
@@ -496,14 +548,37 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
                 android:text="@string/slit"
                 android:textColor="@color/black40"
                 android:textSize="16sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView38"
                 app:layout_constraintTop_toBottomOf="@+id/textView38" />
 
+            <TextView
+                android:id="@+id/CropHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/crop_suggestion"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/textView35"
+                app:layout_constraintTop_toBottomOf="@+id/SlitAns" />
+
+            <TextView
+                android:id="@+id/CropAns"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/crop_suggestion"
+                android:textColor="@color/black40"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/CropHeader"
+                app:layout_constraintTop_toBottomOf="@+id/CropHeader" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -561,7 +636,7 @@
         android:id="@+id/pgNo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1/4"
+        android:text="1/5"
         android:textColor="@color/black40"
         app:layout_constraintBottom_toBottomOf="@+id/nextRep"
         app:layout_constraintEnd_toStartOf="@+id/nextRep"

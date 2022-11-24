@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Program/app/src/main/res/layout/activity_analysis.xml" value="0.264" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_camera.xml" value="0.176" />
+        <entry key="..\:/Program/app/src/main/res/layout/activity_chat.xml" value="0.16" />
+        <entry key="..\:/Program/app/src/main/res/layout/activity_chat_main_screen.xml" value="0.264" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_empty_test_result.xml" value="0.176" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_home_page.xml" value="0.24547101449275363" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_introductory.xml" value="0.2" />
@@ -14,7 +16,7 @@
         <entry key="..\:/Program/app/src/main/res/layout/activity_my_test.xml" value="0.1125" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_send_o_t_p.xml" value="0.20863616930312098" />
         <entry key="..\:/Program/app/src/main/res/layout/activity_suggest_crop.xml" value="0.20863616930312098" />
-        <entry key="..\:/Program/app/src/main/res/layout/activity_test_result.xml" value="0.3935483870967742" />
+        <entry key="..\:/Program/app/src/main/res/layout/activity_test_result.xml" value="0.2" />
         <entry key="..\:/Program/app/src/main/res/layout/custom_confirm_address.xml" value="0.11302083333333333" />
         <entry key="..\:/Program/app/src/main/res/layout/popupconnect.xml" value="0.20863616930312098" />
         <entry key="..\:/Program/app/src/main/res/layout/popuplang.xml" value="0.25416666666666665" />
