@@ -146,8 +146,8 @@ public class HomePage extends AppCompatActivity {
             public void onClick(View v) {
                 Intent openWebview = new Intent(HomePage.this, WebViewActivity.class);
                 openWebview.putExtra("pageTitle",getString(R.string.gov_policies));
-                //openWebview.putExtra("url","https://krishijagran.com/agripedia/best-government-schemes-and-programmes-in-agriculture-for-farmers/");
-                openWebview.putExtra("url","https://agricoop.nic.in/en/ministry-major-schemes");
+                openWebview.putExtra("url","https://krishijagran.com/agripedia/best-government-schemes-and-programmes-in-agriculture-for-farmers/");
+                //openWebview.putExtra("url","https://agricoop.nic.in/en/ministry-major-schemes");
                 startActivity(openWebview);
             }
         });

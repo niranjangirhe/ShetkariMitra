@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -188,6 +189,9 @@ public class IntroductoryActivity extends AppCompatActivity {
         Button Quit = dialog.findViewById(R.id.buttonDialog);
         LottieAnimationView lottieAnimationView = dialog.findViewById(R.id.lottie1);
         lottieAnimationView.setAnimation(R.raw.update);
+        TextView textView = dialog.findViewById(R.id.textView23);
+        textView.setText("Please Update your app");
+        Quit.setText("Update");
         Quit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
