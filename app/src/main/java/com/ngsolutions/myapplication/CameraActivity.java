@@ -17,9 +17,7 @@ import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-//import com.ngsolutions.myapplication.ml.SoilNet;
 import com.ngsolutions.myapplication.ml.SoilNet;
-import com.ngsolutions.myapplication.ml.SoilNet2;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -31,7 +29,7 @@ import java.util.Arrays;
 
 public class CameraActivity extends AppCompatActivity {
 
-    float ThresholdVal = 0.75f;
+    float ThresholdVal = 0.60f;
     Button capture;
     ImageView image;
     Button backBtn, nextBtn;
@@ -128,70 +126,6 @@ public class CameraActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image){
         try {
-
-            SoilNet2 model = SoilNet2.newInstance(getApplicationContext());
-
-
-            // Creates inputs for reference.
-            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, imageSize, imageSize, 3}, DataType.FLOAT32);
-            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
-            byteBuffer.order(ByteOrder.nativeOrder());
-
-            int[] intValues = new int[imageSize * imageSize];
-            image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
-            int pixel = 0;
-            //iterate over each pixel and extract R, G, and B values. Add those values individually to the byte buffer.
-            for(int i = 0; i < imageSize; i ++){
-                for(int j = 0; j < imageSize; j++){
-                    int val = intValues[pixel++]; // RGB
-                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 1));
-                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 1));
-                    byteBuffer.putFloat((val & 0xFF) * (1.f / 1));
-                }
-            }
-
-            inputFeature0.loadBuffer(byteBuffer);
-
-            // Runs model inference and gets result.
-            SoilNet2.Outputs outputs = model.process(inputFeature0);
-            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
-
-            float[] confidences = outputFeature0.getFloatArray();
-            //Toast.makeText(this, "Confidence "+ Arrays.toString(confidences) , Toast.LENGTH_SHORT).show();
-            // find the index of the class with the biggest confidence.
-            int maxPos = 0;
-            float maxConfidence = 0;
-            int secPos=0;
-            for (int i = 0; i < confidences.length; i++) {
-                if (confidences[i] > maxConfidence) {
-                    maxConfidence = confidences[i];
-                    maxPos = i;
-                }
-            }
-            maxConfidence = 0;
-            for (int i = 0; i < confidences.length; i++) {
-                if (confidences[i] > maxConfidence && i!=maxPos) {
-                    maxConfidence = confidences[i];
-                    secPos = i;
-                }
-            }
-            //Toast.makeText(this, "Confident "+confidences[maxPos]+confidences[secPos], Toast.LENGTH_SHORT).show();
-            if(confidences[maxPos]+confidences[secPos]<ThresholdVal)
-            {
-                Toast.makeText(this, "We think this is not a soil. Please retake a soil photo in clear lighting", Toast.LENGTH_SHORT).show();
-            }
-            else {
-                nextBtn.setEnabled(true);
-            }
-
-            //String[] classes = {"Clay_Soil","Black_Soil","ALLUVIAL_Soil", "Red Soil"};
-            //Toast.makeText(this, "Soitl type : "+classes[maxPos], Toast.LENGTH_SHORT).show();
-            Type = maxPos;
-
-            // Releases model resources if no longer used.
-            model.close();
-
-
             SoilNet model1 = SoilNet.newInstance(getApplicationContext());
 
 
@@ -230,21 +164,12 @@ public class CameraActivity extends AppCompatActivity {
                     maxPos1 = i;
                 }
             }
-
+            nextBtn.setEnabled(true);
             //Toast.makeText(this, "Confident "+confidences[maxPos], Toast.LENGTH_SHORT).show();
 
             //String[] classes = {"Clay_Soil","Black_Soil","ALLUVIAL_Soil", "Red Soil"};
             //Toast.makeText(this, "Soitl type : "+classes[maxPos], Toast.LENGTH_SHORT).show();
-            switch (maxPos1)
-            {
-                case 0 : Type=2;
-                break;
-                case 1 : Type = 1;
-                break;
-                case 2 : Type = 0;
-                break;
-                case 3: Type = 3;
-            }
+
             Type = maxPos1;
 
 

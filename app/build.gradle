@@ -7,6 +7,20 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            debuggable false
+        }
+    }
+    splits{
+        abi{
+            enable true
+            universalApk true
+        }
+    }
     defaultConfig {
         applicationId "com.ngsolutions.myapplication"
         minSdkVersion 23
@@ -15,13 +29,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-    }
-
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
