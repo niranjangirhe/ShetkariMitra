@@ -141,24 +141,34 @@ public class TestResultActivity extends AppCompatActivity {
             insideJson = obj.getJSONObject("Fertility");
             cropJson = obj.getJSONObject("crop");
 
-            getData(mode, insideJson);
-
-
-
 
         } catch (JSONException e) {
+            Log.d("TAG", "onCreate: "+e.toString());
             e.printStackTrace();
         }
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Do something after 5s = 5000ms
+                try {
+                    getData(0, insideJson);
+                } catch (JSONException e) {
+                    Log.d("TAG1", "onCreate: "+e.toString());
+                    e.printStackTrace();
+                }
+            }
+        }, 100);
 
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mode--;
                 if(mode==-1)
-                    mode=4;
+                    mode=3;
                 try {
                     getData(mode, insideJson);
-                    pgNo.setText((mode+1)+"/5");
+                    pgNo.setText((mode+1)+"/4");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -168,10 +178,10 @@ public class TestResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 mode++;
-                mode%=5;
+                mode%=4;
                 try {
                     getData(mode, insideJson);
-                    pgNo.setText((mode+1)+"/5");
+                    pgNo.setText((mode+1)+"/4");
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -206,8 +216,9 @@ public class TestResultActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-                            createPdfFromView(pdf,"Test"+System.currentTimeMillis(),2400,3600 ,0);
+                            createPdfFromView(pdf,"Test"+System.currentTimeMillis(),2400,4100 ,0);
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                         }
                     }
@@ -238,7 +249,6 @@ public class TestResultActivity extends AppCompatActivity {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -315,7 +325,7 @@ public class TestResultActivity extends AppCompatActivity {
     private void getData(int i, JSONObject insideJson) throws JSONException {
         PotAns.setText(String.format("%.1f",PotAnsF[i])+" mg/kg");
         PhosAns.setText(String.format("%.1f",PhosAnsF[i])+" mg/kg");
-        if(i!=4) {
+
             CropAns.setVisibility(View.GONE);
             CropSuggestion.setVisibility(View.GONE);
 
@@ -333,28 +343,7 @@ public class TestResultActivity extends AppCompatActivity {
 
             JSONObject pred = insideJson.getJSONObject("predictions");
             Fert.setText(Integer.toString((pred.getInt("fertile_prediction_count")==0?1:pred.getInt("fertile_prediction_count")) * 25) + " %");
-        }
-        else{
-            CropAns.setVisibility(View.VISIBLE);
-            CropSuggestion.setVisibility(View.VISIBLE);
 
-            SoilLevel.setText("Summary of the report");
-            Loc.setText(String.format("%.6f", getIntent().getExtras().getDouble("Lat")) + ", " + String.format("%.6f", getIntent().getExtras().getDouble("Long")) + " (Lat,Long)");
-
-            fetchData(i, insideJson.getJSONObject("oc"), "oc", OC, false);
-            fetchData(i, insideJson.getJSONObject("nitrogen"), "nitrogen", N, false);
-            fetchData(i, insideJson.getJSONObject("ph"), "ph", PH, false);
-            fetchData(i, insideJson.getJSONObject("cec"), "cec", CEC, false);
-            fetchData(i, insideJson.getJSONObject("ocd"), "ocd", OCD, true);
-            fetchData(i, insideJson.getJSONObject("clay"), "clay", Clay, true);
-            fetchData(i, insideJson.getJSONObject("sand"), "sand", Sand, true);
-            fetchData(i, insideJson.getJSONObject("silt"), "silt", Slit, true);
-            fetchData(i, cropJson, "crop", Slit, true);
-
-
-            JSONObject pred = insideJson.getJSONObject("predictions");
-            Fert.setText(Integer.toString((pred.getInt("fertile_prediction_count")==0?1:pred.getInt("fertile_prediction_count")) * 25) + " %");
-        }
 
     }
 
